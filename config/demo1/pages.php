@@ -136,7 +136,14 @@ return array(
     ),
 
     'dogs' => array(
-        'title'  => 'Dogs',
+        'title'  => 'الكــــلاب',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'كلب جديد',
+                'url' => '/dogs/create',
+            ]
+        ],
         'assets' => array(
             'custom' => array(
                 'css' => array(

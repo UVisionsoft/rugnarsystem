@@ -80,13 +80,13 @@ class DogsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('avatar'),
-            Column::make('id')->title('Log ID'),
-            Column::make('name'),
-            Column::make('age'),
-            Column::make('owner'),
-            Column::make('notes'),
-            Column::computed('action')
+            Column::make('id')->title('#'),
+            Column::make('avatar')->title('صورة الكلب'),
+            Column::make('name')->title('اسم الكلب'),
+            Column::make('age')->title('عمر الكلب'),
+            Column::make('owner')->title('مالك الكلب'),
+            Column::make('notes')->title('ملاحظات'),
+            Column::computed('action')->title('خيارات')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center')

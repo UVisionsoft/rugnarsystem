@@ -106,10 +106,10 @@ class UsersDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#')->width(10),
-            Column::make('name')->width(200),
-            Column::make('email'),
-            Column::computed('type'),
-            Column::computed('action')
+            Column::make('name')->title('الاسم')->width(200),
+            Column::make('email')->title('البريد الالكتروني'),
+            Column::computed('type')->title('النوع'),
+            Column::computed('action')->title('خيارات')
                 ->exportable(false)
                 ->printable(false)
                 ->orderable(false)
