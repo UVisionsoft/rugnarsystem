@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\DataTables\SystemLogsDataTable;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Jackiedo\LogReader\LogReader;
 
@@ -87,8 +88,8 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, LogReader $logReader)
+    public function destroy(User $user)
     {
-        return $logReader->find($id)->delete();
+        return $user->delete();
     }
 }

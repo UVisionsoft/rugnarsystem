@@ -24,27 +24,25 @@ class UsersDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action', 'type'])
-            ->editColumn('id', function (Collection $model) {
-                return Str::limit($model->get('id'), 5, '');
-            })
-            ->editColumn('type', function (Collection $model) {
-                $styles = [
-                    'user' => 'danger',
-                    'trainer' => 'warning',
-                    'admin' => 'danger',
 
-                ];
-                $levels = array_keys($styles);
-                $style = 'info';
-                if (isset($styles[$levels[$model->get('type')]])) {
-                    $style = $styles[$levels[$model->get('type')]];
-                }
-                $value = $levels[$model->get('type')];
-
-                return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
-            })
-            ->addColumn('action', function (Collection $model) {
-                return view('pages.log._action-menu', compact('model'));
+//            ->editColumn('type', function ( $model) {
+//                $styles = [
+//                    'user' => 'danger',
+//                    'trainer' => 'warning',
+//                    'admin' => 'danger',
+//
+//                ];
+//                $levels = array_keys($styles);
+//                $style = 'info';
+//                if (isset($styles[$levels[$model->get('type')]])) {
+//                    $style = $styles[$levels[$model->get('type')]];
+//                }
+//                $value = $levels[$model->get('type')];
+//
+//                return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
+//            })
+            ->addColumn('action', function ( $model) {
+                return view('pages.users._action-menu', compact('model'));
             });
     }
 
@@ -57,9 +55,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
-        $data = $model->where('type', $this->userType);
-
-        return $data;
+        return $model->where('type', $this->userType);
     }
 
     /**
@@ -111,14 +107,14 @@ class UsersDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#'),
-            Column::make('name')->width(200),
+            Column::make('name'),
             Column::make('email'),
-            Column::make('type')->width(130),
+            Column::make('type'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('text-center')
-                ->responsivePriority(-1),
+                ->orderable(false)
+                ->addClass('text-center'),
         ];
     }
 
