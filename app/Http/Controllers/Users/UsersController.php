@@ -30,25 +30,35 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+        ]);
+        $types = ['admins', 'trainers', 'users'];
+        $types = array_flip($types);
+        $request->merge(['type' => $types[$request->segment(2)]]);
+        $user = User::create($request->all());
+
+        return redirect('accounts/' . $request->segment(2));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,7 +70,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -72,8 +82,8 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -85,7 +95,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

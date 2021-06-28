@@ -20,7 +20,7 @@ return array(
 
         // Account
         array(
-            'title'      => 'الحسابات',
+            'title'      => 'المستخدمين',
             'icon'       => array(
                 'svg'  => Theme::getSvgIcon("icons/duotone/General/User.svg", "svg-icon-2"),
                 'font' => '<i class="bi bi-person fs-2"></i>',
@@ -33,12 +33,12 @@ return array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
                     array(
-                        'title'      => 'مستخدم',
+                        'title'      => 'العملاء',
                         'path'       => 'accounts/users',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "حسابات المستخدمين",
+                                "title"             => "بيانات العملاء",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
@@ -52,7 +52,7 @@ return array(
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "حسابات المدربين",
+                                "title"             => "بيانات المدربين",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
@@ -66,7 +66,7 @@ return array(
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "حسابات المديرين",
+                                "title"             => "بيانات المديرين",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
@@ -74,7 +74,6 @@ return array(
                             ),
                         ),
                     ),
-
                 ),
             ),
         ),

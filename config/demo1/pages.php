@@ -1,15 +1,15 @@
 <?php
 return array(
     'index' => array(
-        'title'       => 'Dashboard',
+        'title' => 'الرئيسية',
         'description' => '',
-        'view'        => 'index',
-        'layout'      => array(
+        'view' => 'index',
+        'layout' => array(
             'page-title' => array(
                 'breadcrumb' => false // hide breadcrumb
             ),
         ),
-        'assets'      => array(
+        'assets' => array(
             'custom' => array(
                 'js' => array(
                     'js/custom/widgets.js',
@@ -25,10 +25,10 @@ return array(
             'layout' => array(
                 // Aside
                 'aside' => array(
-                    'display'  => true, // Display aside
-                    'theme'    => 'light', // Set aside theme(dark|light)
+                    'display' => true, // Display aside
+                    'theme' => 'light', // Set aside theme(dark|light)
                     'minimize' => false, // Allow aside minimize toggle
-                    'menu'     => 'documentation' // Set aside menu type(main|documentation)
+                    'menu' => 'documentation' // Set aside menu type(main|documentation)
                 ),
 
                 'header' => array(
@@ -40,17 +40,17 @@ return array(
                 ),
 
                 'page-title' => array(
-                    'layout'            => 'documentation',
-                    'description'       => false,
-                    'responsive'        => true,
+                    'layout' => 'documentation',
+                    'description' => false,
+                    'responsive' => true,
                     'responsive-target' => '#kt_header_nav' // Responsive target selector
                 ),
             ),
         ),
     ),
 
-    'login'           => array(
-        'title'  => 'Login',
+    'login' => array(
+        'title' => 'Login',
         'assets' => array(
             'custom' => array(
                 'js' => array(
@@ -59,8 +59,8 @@ return array(
             ),
         ),
     ),
-    'register'        => array(
-        'title'  => 'Register',
+    'register' => array(
+        'title' => 'Register',
         'assets' => array(
             'custom' => array(
                 'js' => array(
@@ -70,7 +70,7 @@ return array(
         ),
     ),
     'forgot-password' => array(
-        'title'  => 'Forgot Password',
+        'title' => 'Forgot Password',
         'assets' => array(
             'custom' => array(
                 'js' => array(
@@ -87,7 +87,7 @@ return array(
                     'css' => array(
                         'plugins/custom/datatables/datatables.bundle.css',
                     ),
-                    'js'  => array(
+                    'js' => array(
                         'plugins/custom/datatables/datatables.bundle.js',
                     ),
                 ),
@@ -95,25 +95,55 @@ return array(
         ),
 
         'admins' => array(
-            'title'  => 'حسابات المديرين',
+            'title' => 'قائمة المديرين',
+            'top_bar' => [
+                'create' => [
+                    'caption' => 'إضافة جديد',
+                    'title' => 'مدير جديد',
+                    'url' => '/accounts/admins/create',
+                ]
+            ],
+            'create'=>[
+                'title' => 'تسجيل مدير جديد',
+            ]
         ),
         'trainers' => array(
-            'title'  => 'حسابات المدربين',
+            'title' => 'قائمة المدربين',
+            'top_bar' => [
+                'create' => [
+                    'caption' => 'إضافة جديد',
+                    'title' => 'مدرب جديد',
+                    'url' => '/accounts/trainers/create',
+                ]
+            ],
+            'create'=>[
+                'title' => 'تسجيل مدرب جديد',
+            ]
         ),
         'users' => array(
-            'title'  => 'حسابات المستخدمين',
+            'title' => 'قائمة العملاء',
+            'top_bar' => [
+                'create' => [
+                    'caption' => 'إضافة جديد',
+                    'title' => 'عميل جديد',
+                    'url' => '/accounts/users/create',
+                ]
+            ],
+            'create'=>[
+                'title' => 'تسجيل عميل جديد',
+            ]
         ),
     ),
 
     'log' => array(
         'system' => array(
-            'title'  => 'System Log',
+            'title' => 'System Log',
             'assets' => array(
                 'custom' => array(
                     'css' => array(
                         'plugins/custom/datatables/datatables.bundle.css',
                     ),
-                    'js'  => array(
+                    'js' => array(
                         'plugins/custom/datatables/datatables.bundle.js',
                     ),
                 ),
