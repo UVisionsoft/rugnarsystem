@@ -14,6 +14,13 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
 
     /**
+     * User Types attribute
+     *
+     * @var array
+     */
+    static $types = ['admin', 'trainer', 'user'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

@@ -17,7 +17,8 @@ class UsersController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('pages.log.index');
+//        dd($dataTable->render('pages.users.index'));
+        return $dataTable->ofType('admin')->render('pages.users.index');
     }
 
     /**

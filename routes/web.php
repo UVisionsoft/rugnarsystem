@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Documentation\ReferencesController;
-use App\Http\Controllers\Logs\UsersController;
+use App\Http\Controllers\Users\UsersController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,7 @@ array_walk($menu, function ($val) {
 
 // Logs pages
 Route::prefix('log')->name('log.')->group(function () {
-    Route::resource('system', UsersController::class);
+    Route::resource('system', \App\Http\Controllers\Logs\SystemLogsController::class);
 });
 
 Route::prefix('accounts')->name('accounts.')->group(function () {

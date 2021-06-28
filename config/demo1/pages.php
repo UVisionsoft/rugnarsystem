@@ -80,6 +80,31 @@ return array(
         ),
     ),
 
+    'accounts' => array(
+        '*' => array(
+            'assets' => array(
+                'custom' => array(
+                    'css' => array(
+                        'plugins/custom/datatables/datatables.bundle.css',
+                    ),
+                    'js'  => array(
+                        'plugins/custom/datatables/datatables.bundle.js',
+                    ),
+                ),
+            ),
+        ),
+
+        'admins' => array(
+            'title'  => 'حسابات المديرين',
+        ),
+        'trainers' => array(
+            'title'  => 'حسابات المدربين',
+        ),
+        'users' => array(
+            'title'  => 'حسابات المستخدمين',
+        ),
+    ),
+
     'log' => array(
         'system' => array(
             'title'  => 'System Log',

@@ -2,60 +2,46 @@
 
 namespace App\DataTables;
 
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException;
-use Jackiedo\LogReader\LogReader;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
+    protected $userType;
+
     /**
      * Build DataTable class.
      *
-     * @param  mixed  $query  Results from query() method.
+     * @param mixed $query Results from query() method.
      *
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
         return datatables()
-            ->collection($query)
-            ->rawColumns(['action', 'level'])
+            ->eloquent($query)
+            ->rawColumns(['action', 'type'])
             ->editColumn('id', function (Collection $model) {
                 return Str::limit($model->get('id'), 5, '');
             })
-            ->editColumn('file_path', function (Collection $model) {
-                return Str::limit($model->get('file_path'));
-            })
-            ->editColumn('message', function (Collection $model) {
-                return Str::limit($model->get('context')->message, 95);
-            })
-            ->editColumn('date', function (Collection $model) {
-                return $model->get('date')->format('Y-m-d H:i:s');
-            })
-            ->editColumn('level', function (Collection $model) {
+            ->editColumn('type', function (Collection $model) {
                 $styles = [
-                    'emergency' => 'danger',
-                    'alert'     => 'warning',
-                    'critical'  => 'danger',
-                    'error'     => 'danger',
-                    'warning'   => 'warning',
-                    'notice'    => 'success',
-                    'info'      => 'info',
-                    'debug'     => 'primary',
-                ];
-                $style  = 'info';
-                if (isset($styles[$model->get('level')])) {
-                    $style = $styles[$model->get('level')];
-                }
-                $value = $model->get('level');
+                    'user' => 'danger',
+                    'trainer' => 'warning',
+                    'admin' => 'danger',
 
-                return '<div class="badge badge-light-'.$style.' fw-bolder">'.$value.'</div>';
-            })
-            ->editColumn('context', function (Collection $model) {
-                return view('pages.log._details', compact('model'));
+                ];
+                $levels = array_keys($styles);
+                $style = 'info';
+                if (isset($styles[$levels[$model->get('type')]])) {
+                    $style = $styles[$levels[$model->get('type')]];
+                }
+                $value = $levels[$model->get('type')];
+
+                return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
             })
             ->addColumn('action', function (Collection $model) {
                 return view('pages.log._action-menu', compact('model'));
@@ -65,24 +51,13 @@ class UsersDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  LogReader  $model
+     * @param User $model
      *
      * @return Collection
      */
-    public function query(LogReader $model)
+    public function query(User $model)
     {
-        $data = collect();
-
-        $model->setLogPath(storage_path('logs'));
-
-        try {
-            $data = $model->get()->merge($data);
-        } catch (UnableToRetrieveLogFilesException $exception) {
-        }
-
-        $data = $data->map(function ($a) {
-            return (collect($a))->only(['id', 'date', 'environment', 'level', 'file_path', 'context']);
-        });
+        $data = $model->where('type', $this->userType);
 
         return $data;
     }
@@ -115,6 +90,18 @@ class UsersDataTable extends DataTable
 }");
     }
 
+    public function ofType($type)
+    {
+        $types = User::$types;
+        if (!in_array($type, $types))
+            throw new \Exception('unknown user type only supported: ' . implode(',', $types));
+
+        $types = array_flip($types);
+        $this->userType = $types[$type];
+
+        return $this;
+    }
+
     /**
      * Get columns.
      *
@@ -123,18 +110,15 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('Log ID'),
-            Column::make('message')->width(200),
-            Column::make('level'),
-            Column::make('date')->width(130),
+            Column::make('id')->title('#'),
+            Column::make('name')->width(200),
+            Column::make('email'),
+            Column::make('type')->width(130),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center')
                 ->responsivePriority(-1),
-            Column::make('environment')->addClass('none'),
-            Column::make('file_path')->title(__('Log Path'))->addClass('none'),
-            Column::make('context')->addClass('none'),
         ];
     }
 
@@ -145,6 +129,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'SystemLogs_'.date('YmdHis');
+        return 'AccountLogs_' . date('YmdHis');
     }
 }
