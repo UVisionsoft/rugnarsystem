@@ -15,6 +15,11 @@ class CreateDogActivitiesTable extends Migration
     {
         Schema::create('dog_activities', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('dog_id');
+            $table->foreign('dog_id')->references('id')->on('dogs')->onDelete('cascade');
+            $table->unsignedBigInteger('activity_id');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            $table->integer('duration');
             $table->timestamps();
         });
     }

@@ -15,6 +15,11 @@ class CreateDogVaccinesTable extends Migration
     {
         Schema::create('dog_vaccines', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('dog_id');
+            $table->foreign('dog_id')->references('id')->on('dogs')->onDelete('cascade');
+            $table->unsignedBigInteger('vaccine_id');
+            $table->foreign('vaccine_id')->references('id')->on('vaccines')->onDelete('cascade');
+            $table->unsignedTinyInteger('status');
             $table->timestamps();
         });
     }
