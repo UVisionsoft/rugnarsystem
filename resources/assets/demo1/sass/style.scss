@@ -1,9 +1,10 @@
 //
 // Theme style
 //
-*{
+* {
     font-family: Tajawal;
 }
+
 // Initialize
 @import "init";
 
@@ -15,17 +16,28 @@
 @import "layout/layout";
 //
 //
-.dataTables_filter{
-    label{
-        input{
+.dataTables_filter {
+    label {
+        input {
             display: inline-block;
         }
     }
 }
-.dataTables_scrollBody{
 
-    table.dataTable{
-        thead{
+.dataTables_length {
+    label {
+        width: 50%;
+
+        select {
+            display: inherit;
+            width: 80px;
+        }
+    }
+}
+
+.dataTables_scrollBody {
+    table.dataTable {
+        thead {
             visibility: collapse;
         }
     }
