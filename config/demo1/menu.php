@@ -82,7 +82,7 @@ return array(
         array(
             'title' => 'الكلاب',
             'path'  => '/dogs',
-            'icon'  => Theme::getSvgIcon("icons/duotone/Design/PenAndRuller.svg", "svg-icon-2"),
+            'icon'  => Theme::getSvgIcon("icons/duotone/dog.svg", "svg-icon-2"),
         ),
         // System
         array(
