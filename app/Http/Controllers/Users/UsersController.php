@@ -7,6 +7,7 @@ use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Jackiedo\LogReader\LogReader;
 
 class UsersController extends Controller
@@ -18,8 +19,8 @@ class UsersController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-//        dd($dataTable->render('pages.users.index'));
-        return $dataTable->ofType('admin')->render('pages.users.index');
+        $type = Str::singular(request()->segment(2));
+        return $dataTable->ofType($type)->render('pages.users.index');
     }
 
     /**

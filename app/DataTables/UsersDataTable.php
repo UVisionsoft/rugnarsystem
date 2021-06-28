@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Dog;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -24,24 +25,22 @@ class UsersDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action', 'type'])
+            ->editColumn('type', function ($model) {
+                $styles = [
+                    'مدير' => 'danger',
+                    'مدرب' => 'warning',
+                    'مستخدم' => 'danger',
+                ];
+                $levels = array_keys($styles);
+                $style = 'info';
+                if (isset($styles[$levels[$model->type]])) {
+                    $style = $styles[$levels[$model->type]];
+                }
+                $value = $levels[$model->type];
 
-//            ->editColumn('type', function ( $model) {
-//                $styles = [
-//                    'user' => 'danger',
-//                    'trainer' => 'warning',
-//                    'admin' => 'danger',
-//
-//                ];
-//                $levels = array_keys($styles);
-//                $style = 'info';
-//                if (isset($styles[$levels[$model->get('type')]])) {
-//                    $style = $styles[$levels[$model->get('type')]];
-//                }
-//                $value = $levels[$model->get('type')];
-//
-//                return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
-//            })
-            ->addColumn('action', function ( $model) {
+                return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
+            })
+            ->addColumn('action', function ($model) {
                 return view('pages.users._action-menu', compact('model'));
             });
     }
@@ -66,10 +65,10 @@ class UsersDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('system-log-table')
+            ->setTableId('user-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(3)
+            ->orderBy(0)
             ->responsive()
             ->autoWidth(false)
             ->dom("<f<t>
@@ -106,10 +105,10 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('#'),
-            Column::make('name'),
+            Column::make('id')->title('#')->width(10),
+            Column::make('name')->width(200),
             Column::make('email'),
-            Column::make('type'),
+            Column::computed('type'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -125,6 +124,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'AccountLogs_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

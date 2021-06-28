@@ -12,7 +12,7 @@
 
             LaravelDataTables['users-log-table'].on('click', '[data-destroy]', function (e) {
                 e.preventDefault();
-                if (!confirm("{{ __('Are you sure to delete this record?') }}")) {
+                if (!confirm("{{ __('هل انت متأكد من الحذف ؟') }}")) {
                     return;
                 }
 

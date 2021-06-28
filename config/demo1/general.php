@@ -99,7 +99,8 @@ return array(
         'favicon' => 'media/logos/favicon.ico',
         'fonts'   => array(
             'google' => array(
-                'Poppins:300,400,500,600,700',
+//                'Poppins:300,400,500,600,700',
+                'Tajawal:200,300,400,500,700,800,900',
             ),
         ),
         'css'     => array(

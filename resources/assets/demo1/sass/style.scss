@@ -1,7 +1,9 @@
 //
 // Theme style
 //
-
+*{
+    font-family: Tajawal;
+}
 // Initialize
 @import "init";
 
@@ -11,3 +13,20 @@
 
 // Layout
 @import "layout/layout";
+//
+//
+.dataTables_filter{
+    label{
+        input{
+            display: inline-block;
+        }
+    }
+}
+.dataTables_scrollBody{
+
+    table.dataTable{
+        thead{
+            visibility: collapse;
+        }
+    }
+}
