@@ -49,5 +49,6 @@ Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('admins', UsersController::class);
 });
 
+Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 require __DIR__.'/auth.php';

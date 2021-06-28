@@ -105,6 +105,20 @@ return array(
         ),
     ),
 
+    'dogs' => array(
+        'title'  => 'Dogs',
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js'  => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+    ),
+
     'log' => array(
         'system' => array(
             'title'  => 'System Log',
