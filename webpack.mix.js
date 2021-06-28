@@ -143,11 +143,11 @@ mix.webpackConfig({
             },
         ]),
         // Uncomment this part for RTL version
-        /*new WebpackRTLPlugin({
+        new WebpackRTLPlugin({
             filename: '[name].rtl.css',
             options: {},
             plugins: [],
-        })*/
+        })
     ],
     ignoreWarnings: [{
         module: /esri-leaflet/,

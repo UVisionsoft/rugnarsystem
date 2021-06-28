@@ -127,6 +127,7 @@ if (!function_exists('assetIfHasRTL')) {
 if (!function_exists('isRTL')) {
     function isRTL()
     {
-        return (bool) request()->input('rtl');
+        return true;
+//        return (bool) request()->input('rtl');
     }
 }
