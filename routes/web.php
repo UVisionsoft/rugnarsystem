@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Documentation\ReferencesController;
-use App\Http\Controllers\Logs\SystemLogsController;
+use App\Http\Controllers\Logs\UsersController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,15 +32,22 @@ array_walk($menu, function ($val) {
     }
 });
 
-// Documentations pages
-Route::prefix('documentation')->group(function () {
-    Route::get('getting-started/references', [ReferencesController::class, 'index']);
-    Route::get('getting-started/changelog', [PagesController::class, 'index']);
-});
+//// Documentations pages
+//Route::prefix('documentation')->group(function () {
+//    Route::get('getting-started/references', [ReferencesController::class, 'index']);
+//    Route::get('getting-started/changelog', [PagesController::class, 'index']);
+//});
 
 // Logs pages
 Route::prefix('log')->name('log.')->group(function () {
-    Route::resource('system', SystemLogsController::class);
+    Route::resource('system', UsersController::class);
 });
+
+Route::prefix('accounts')->name('accounts.')->group(function () {
+    Route::resource('users', UsersController::class);
+    Route::resource('trainers', UsersController::class);
+    Route::resource('admins', UsersController::class);
+});
+
 
 require __DIR__.'/auth.php';

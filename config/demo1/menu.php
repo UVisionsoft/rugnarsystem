@@ -20,7 +20,7 @@ return array(
 
         // Account
         array(
-            'title'      => 'Account',
+            'title'      => 'الحسابات',
             'icon'       => array(
                 'svg'  => Theme::getSvgIcon("icons/duotone/General/User.svg", "svg-icon-2"),
                 'font' => '<i class="bi bi-person fs-2"></i>',
@@ -33,12 +33,12 @@ return array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
                     array(
-                        'title'      => 'Overview',
-                        'path'       => '#',
+                        'title'      => 'مستخدم',
+                        'path'       => 'accounts/users',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "Coming soon",
+                                "title"             => "حسابات المستخدمين",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
@@ -47,12 +47,12 @@ return array(
                         ),
                     ),
                     array(
-                        'title'      => 'Settings',
-                        'path'       => '#',
+                        'title'      => 'مدرب',
+                        'path'       => 'accounts/trainers',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "Coming soon",
+                                "title"             => "حسابات المدربين",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
@@ -61,12 +61,12 @@ return array(
                         ),
                     ),
                     array(
-                        'title'      => 'Security',
-                        'path'       => '#',
+                        'title'      => 'مدير',
+                        'path'       => 'accounts/admins',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
                             'link' => array(
-                                "title"             => "Coming soon",
+                                "title"             => "حسابات المديرين",
                                 "data-bs-toggle"    => "tooltip",
                                 "data-bs-trigger"   => "hover",
                                 "data-bs-dismiss"   => "click",
@@ -74,6 +74,7 @@ return array(
                             ),
                         ),
                     ),
+
                 ),
             ),
         ),
@@ -146,52 +147,9 @@ return array(
     'horizontal' => array(
         // Dashboard
         array(
-            'title'   => 'Dashboard',
+            'title'   => 'الرئيسية',
             'path'    => 'index',
             'classes' => array('item' => 'me-lg-1'),
-        ),
-
-        // Resources
-        array(
-            'title'      => 'Resources',
-            'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
-            'attributes' => array(
-                'data-kt-menu-trigger'   => "click",
-                'data-kt-menu-placement' => "bottom-start",
-            ),
-            'sub'        => array(
-                'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
-                'items' => array(
-
-                    // Documentation
-                    array(
-                        'title' => 'Documentation',
-                        'icon'  => Theme::getSvgIcon("icons/duotone/Home/Library.svg", "svg-icon-2"),
-                        'path'  => 'documentation/getting-started/overview',
-                    ),
-
-                    // Changelog
-                    array(
-                        'title' => 'Changelog',
-                        'icon'  => Theme::getSvgIcon("icons/duotone/Files/File.svg", "svg-icon-2"),
-                        'path'  => 'documentation/getting-started/changelog',
-                    ),
-                ),
-            ),
-        ),
-
-        // Mega menu
-        array(
-            'title'      => 'Mega Menu',
-            'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
-            'attributes' => array(
-                'data-kt-menu-trigger'   => "click",
-                'data-kt-menu-placement' => "bottom-start",
-            ),
-            'sub'        => array(
-                'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown w-100 w-lg-600px p-5 p-lg-5',
-                'view'  => 'layout/header/_mega-menu',
-            ),
         ),
     ),
 );
