@@ -161,13 +161,13 @@ return array(
         ),
     ),
 
-    'vaccines' => array(
-        'title'  => 'التطعيمات',
+    'activities' => array(
+        'title'  => 'التدريبات',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
-                'title' => 'تطعيم جديد',
-                'url' => '/vaccines/create',
+                'title' => 'تدريب جديد',
+                'url' => '/activities/create',
             ]
         ],
         'assets' => array(
@@ -181,21 +181,25 @@ return array(
             ),
         ),
     ),
-
-    'log' => array(
-        'system' => array(
-            'title' => 'System Log',
+    'vaccines' => array(
+            'title'  => 'التطعيمات',
+            'top_bar' => [
+                'create' => [
+                    'caption' => 'إضافة جديد',
+                    'title' => 'تطعيم جديد',
+                    'url' => '/vaccines/create',
+                ]
+            ],
             'assets' => array(
                 'custom' => array(
                     'css' => array(
                         'plugins/custom/datatables/datatables.bundle.css',
                     ),
-                    'js' => array(
+                    'js'  => array(
                         'plugins/custom/datatables/datatables.bundle.js',
                     ),
                 ),
             ),
         ),
-    ),
 
 );

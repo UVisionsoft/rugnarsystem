@@ -88,7 +88,7 @@ return array(
         array(
             'title' => 'التدريبات',
             'path'  => '/activities',
-            'icon'  => Theme::getSvgIcon("icons/duotone/dog.svg", "svg-icon-2"),
+            'icon'  => Theme::getSvgIcon("icons/duotone/tasks.svg", "svg-icon-2"),
         ),
         // Vacciones
         array(
