@@ -20,6 +20,8 @@ class CreateDogVaccinesTable extends Migration
             $table->unsignedBigInteger('vaccine_id');
             $table->foreign('vaccine_id')->references('id')->on('vaccines')->onDelete('cascade');
             $table->unsignedTinyInteger('status');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
