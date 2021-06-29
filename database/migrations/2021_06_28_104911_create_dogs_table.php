@@ -18,6 +18,7 @@ class CreateDogsTable extends Migration
             $table->string('name');
             $table->string('avatar')->default('media/avatars/dog-placeholder.png');
             $table->integer('age');
+            $table->string('registration_num')->default('');
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

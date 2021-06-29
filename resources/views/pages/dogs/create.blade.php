@@ -38,7 +38,7 @@
                     <div class="form-group col-md-6">
                         <label>مالك الكلب</label>
                         <select name="user_id" class="form-control form-control-solid">
-                            <option>اختر مالك الكلب</option>
+                            <option value="" readonly>اختر مالك الكلب</option>
                             @foreach($owners as $owner)
                             <option value="{{$owner->id}}" @if($owner->id == old("user_id")) selected @endif >{{$owner->name}}</option>
                             @endforeach
@@ -46,6 +46,11 @@
                         @error('user_id')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
+                    </div>
+                    <div class="form-group col-md">
+                        <label>رقم التسجيل</label>
+                        <input type="text" name="registration_num" class="form-control form-control-solid"
+                               placeholder="رقم التسجيل" value="{{old('registration_num')}}"/>
                     </div>
                     <div class="form-control-solid">
                         <label>ملاحظات</label>

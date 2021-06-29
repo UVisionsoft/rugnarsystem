@@ -9,7 +9,7 @@ class Dog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','avatar','age','notes','user_id',];
+    protected $fillable = ['name','avatar','age','notes','user_id','registration_num'];
 
     public function user()
     {

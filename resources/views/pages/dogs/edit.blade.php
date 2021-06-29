@@ -54,6 +54,11 @@
                         <small class="text-danger">{{$message}}</small>
                         @enderror
                     </div>
+                    <div class="form-group col-md">
+                        <label>رقم التسجيل</label>
+                        <input type="text" name="registration_num" class="form-control form-control-solid"
+                               placeholder="رقم التسجيل" value="{{old('registration_num')??$dog->registration_num}}"/>
+                    </div>
                     <div class="form-control-solid">
                         <label>ملاحظات</label>
                         <textarea name="notes" class="form-control-solid form-control" cols="30" rows="5">{{old('notes')??$dog->notes}}</textarea>
