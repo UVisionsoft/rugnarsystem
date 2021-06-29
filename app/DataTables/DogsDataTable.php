@@ -88,6 +88,7 @@ class DogsDataTable extends DataTable
             Column::make('name')->title('اسم الكلب'),
             Column::make('age')->title('عمر الكلب'),
             Column::make('owner')->title('مالك الكلب'),
+            Column::make('registration_num')->title('رقم التسجيل'),
             Column::make('notes')->title('ملاحظات'),
             Column::computed('action')->title('خيارات')
                 ->exportable(false)
