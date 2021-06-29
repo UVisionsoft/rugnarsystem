@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Jackiedo\LogReader\LogReader;
 
 class UsersController extends Controller
@@ -74,9 +75,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('pages.users.edit', compact('user'));
     }
 
     /**
@@ -87,9 +88,22 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
+            'password' => 'nullable|min:6',
+        ]);
+
+        if($request->filled('password')){
+            $request->merge(['password'=> bcrypt($request->get('password'))]);
+        } else {
+            $request->request->remove('password');
+        }
+        $user->update($request->all());
+
+        return redirect('accounts/' . $request->segment(2));
     }
 
     /**

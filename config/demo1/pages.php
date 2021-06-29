@@ -59,6 +59,7 @@ return array(
             ),
         ),
     ),
+
     'register' => array(
         'title' => 'Register',
         'assets' => array(
@@ -69,6 +70,7 @@ return array(
             ),
         ),
     ),
+
     'forgot-password' => array(
         'title' => 'Forgot Password',
         'assets' => array(
@@ -105,6 +107,9 @@ return array(
             ],
             'create'=>[
                 'title' => 'تسجيل مدير جديد',
+            ],
+            'edit'=>[
+                'title' => 'تعديل مدير',
             ]
         ),
         'trainers' => array(
@@ -142,6 +147,27 @@ return array(
                 'caption' => 'إضافة جديد',
                 'title' => 'كلب جديد',
                 'url' => '/dogs/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js'  => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+    ),
+
+    'activities' => array(
+        'title'  => 'التدريبات',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'تدريب جديد',
+                'url' => '/activities/create',
             ]
         ],
         'assets' => array(

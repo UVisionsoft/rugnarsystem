@@ -84,6 +84,12 @@ return array(
             'path'  => '/dogs',
             'icon'  => Theme::getSvgIcon("icons/duotone/dog.svg", "svg-icon-2"),
         ),
+        // activities
+        array(
+            'title' => 'التدريبات',
+            'path'  => '/activities',
+            'icon'  => Theme::getSvgIcon("icons/duotone/dog.svg", "svg-icon-2"),
+        ),
         // System
         array(
             'title'      => 'System',
