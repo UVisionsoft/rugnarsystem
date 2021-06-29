@@ -9,6 +9,8 @@ class Dog extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','avatar','age','notes','user_id',];
+
     public function user()
     {
         return $this->belongsTo(User::class);
