@@ -45,14 +45,17 @@ Route::prefix('log')->name('log.')->group(function () {
 
 Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('users', UsersController::class);
-    Route::resource('trainers', UsersController::class);
-    Route::resource('admins', UsersController::class);
+    Route::resource('trainers', UsersController::class)->parameters(['trainers' => 'user']);
+    Route::resource('admins', UsersController::class)->parameters(['admins' => 'user']);
 });
-
-Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 Route::resource('activities',\App\Http\Controllers\Activities\ActivitiesController::class);
 
 Route::resource('vaccines',\App\Http\Controllers\Vaccines\VaccinesController::class);
+
+Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
+
+Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
+
 
 require __DIR__.'/auth.php';

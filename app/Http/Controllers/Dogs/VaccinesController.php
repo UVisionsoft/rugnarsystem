@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Dogs;
 
-use App\DataTables\Dogs\DogsDataTable;
+use App\DataTables\DogsDataTable;
+use App\DataTables\VaccinesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DogRequest;
 use App\Models\Dog;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class DogsController extends Controller
+class VaccinesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DogsDataTable $dataTable)
+    public function index(VaccinesDataTable $dataTable)
     {
 //        return  $dogs = Dog::all();
         return $dataTable->render('pages.dogs.index');

@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-control-solid">
                         <label>ملاحظات</label>
-                        <textarea name="notes" class="form-control-solid" cols="30" rows="5">{{old('notes')}}</textarea>
+                        <textarea name="notes" class="form-control form-control-solid" cols="30" rows="5">{{old('notes')}}</textarea>
                     </div>
 
                 </div>

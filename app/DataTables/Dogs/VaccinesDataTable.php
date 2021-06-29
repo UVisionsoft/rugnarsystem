@@ -1,8 +1,10 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Dogs;
 
-use App\Models\Dog;
+use App\Models\Activity;
+use App\Models\Vaccine;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException;
@@ -10,12 +12,12 @@ use Jackiedo\LogReader\LogReader;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class DogsDataTable extends DataTable
+class VaccinesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @param  mixed  $query  Results from query() method.
+     * @param mixed $query Results from query() method.
      *
      * @return \Yajra\DataTables\DataTableAbstract
      */
@@ -23,28 +25,22 @@ class DogsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action', 'owner', 'avatar'])
-            ->editColumn('avatar', function ( $model) {
-                return '<img src="'.asset($model->avatar).'" width="50" height="50" class="rounded-circle">';
-            })
-            ->editColumn('owner', function ( $model) {
-                return "<a href='".route('accounts.users.show', $model->user_id)."'>{$model->user->name}</a>";
-            })
-            ->addColumn('action', function ( $model) {
-                return view('pages.dogs._action-menu', compact('model'));
+            ->rawColumns(['action'])
+            ->addColumn('action', function (Vaccine $model) {
+                return view('pages.vaccines._action-menu', compact('model'));
             });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param  Dog  $model
+     * @param Activity $model
      *
-     * @return Collection
+     * @return Builder
      */
-    public function query(Dog $model)
+    public function query(Vaccine $model)
     {
-        return $model->with('user')->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -55,10 +51,10 @@ class DogsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('dogs-table')
+            ->setTableId('vaccines-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(3)
+            ->orderBy(0)
             ->responsive()
             ->autoWidth(false)
             ->dom("<f<t>
@@ -84,15 +80,8 @@ class DogsDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#'),
-            Column::make('avatar')->title('صورة الكلب'),
-            Column::make('name')->title('اسم الكلب'),
-            Column::make('age')->title('عمر الكلب'),
-            Column::make('owner')->title('مالك الكلب'),
-            Column::computed('action')->title('خيارات')
-                ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center')
-                ->responsivePriority(-1),
+            Column::make('name')->title('اسم التطعيم'),
+            Column::make('action')->title('خيارات'),
         ];
     }
 
@@ -103,6 +92,6 @@ class DogsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'SystemLogs_'.date('YmdHis');
+        return 'Activities_' . date('YmdHis');
     }
 }

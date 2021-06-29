@@ -7,7 +7,7 @@
         <div class="card-header">
             <h3 class="card-title">تعديل بيانات مدير</h3>
         </div>
-        <form action="{{route('accounts.'.request()->segment(2).'.update',[$user->id])}}" method="post">
+        <form action="{{route('accounts.'.request()->segment(2).'.update', $user->id)}}" method="post">
             @method('PATCH')
             @csrf
             <div class="card-body pt-6">
