@@ -13,7 +13,7 @@
     </div>
     {{--end::Search--}}
 
-    {{--begin::Activities--}}
+    {{--begin::Activity--}}
     <div class="d-flex align-items-center {{ $toolbarButtonMarginClass  }}">
         {{--begin::drawer toggle--}}
         <div class="btn btn-icon btn-active-light-primary {{ $toolbarButtonHeightClass  }}" id="kt_activities_toggle">
@@ -21,7 +21,7 @@
         </div>
         {{--end::drawer toggle--}}
     </div>
-    {{--end::Activities--}}
+    {{--end::Activity--}}
 
     {{--begin::Notifications--}}
     <div class="d-flex align-items-center {{ $toolbarButtonMarginClass }}">

@@ -1,4 +1,4 @@
-<!--begin::Activities drawer-->
+<!--begin::Activity drawer-->
 <div
 	id="kt_activities"
 	class="bg-white"
@@ -70,4 +70,4 @@
 		<!--end::Footer-->
 	</div>
 </div>
-<!--end::Activities drawer-->
+<!--end::Activity drawer-->
