@@ -21,5 +21,10 @@ class Dog extends Model
         return $this->belongsToMany(Vaccine::class, 'dog_vaccines','dog_id','vaccine_id')->withPivot('status');
     }
 
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class, 'dog_activities', 'dog_id', 'activity_id')->withPivot('duration');
+    }
+
 //    public function
 }

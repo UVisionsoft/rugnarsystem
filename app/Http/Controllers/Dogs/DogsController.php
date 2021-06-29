@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dogs;
 use App\DataTables\Dogs\DogsDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DogRequest;
+use App\Models\Activity;
 use App\Models\Dog;
 use App\Models\User;
 use App\Models\Vaccine;
@@ -33,8 +34,9 @@ class DogsController extends Controller
     {
         $owners = User::where('type', 2)->get();
         $vaccines = Vaccine::pluck('name', 'id');
+        $activities = Activity::pluck('name', 'id');
 
-        return view('pages.dogs.create', compact('owners', 'vaccines'));
+        return view('pages.dogs.create', compact('owners', 'vaccines', 'activities'));
     }
 
     /**
@@ -52,6 +54,13 @@ class DogsController extends Controller
             'user_id' => ['required'],
         ]);
         $data = $request->all();
+        $data['activities'] = array_map(function ($activity) {
+            if ($activity['duration'] === null)
+                return ['duration' => 0];
+            return ['duration' => (int)$activity['duration']];
+        }, $data['activities']);
+
+
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request->file('avatar')->store('uploads/dogs/avatars');
         } else {
@@ -63,6 +72,7 @@ class DogsController extends Controller
             $data['vaccines'] = [];
 
         $dog->vaccines()->sync($data['vaccines']);
+        $dog->activities()->sync($data['activities']);
 
         return redirect('dogs');
     }
@@ -89,8 +99,9 @@ class DogsController extends Controller
         $vaccines = Vaccine::all();
         $dog = Dog::where('id', $id)->with('vaccines')->first();
         $owners = User::where('type', 2)->get();
+        $activities = Activity::pluck('name', 'id');
 
-        return view('pages.dogs.edit', compact('dog', 'owners', 'vaccines'));
+        return view('pages.dogs.edit', compact('dog', 'owners', 'vaccines', 'activities'));
     }
 
     /**
