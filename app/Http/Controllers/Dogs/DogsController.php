@@ -130,6 +130,7 @@ class DogsController extends Controller
 //        return $data;
         $dog->update($data);
         $dog->vaccines()->sync($data['vaccines']);
+        $dog->activities()->sync($data['activities']);
 
         return redirect('dogs');
     }
