@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DogRequest;
 use App\Models\Dog;
 use App\Models\User;
+use App\Models\Vaccine;
 use Illuminate\Http\Request;
 
 class DogsController extends Controller
@@ -30,15 +31,17 @@ class DogsController extends Controller
      */
     public function create()
     {
-        $owners = User::where('type',2)->get();
-        return view('pages.dogs.create',compact('owners'));
+        $owners = User::where('type', 2)->get();
+        $vaccines = Vaccine::pluck('name', 'id');
+
+        return view('pages.dogs.create', compact('owners', 'vaccines'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -49,21 +52,25 @@ class DogsController extends Controller
             'user_id' => ['required'],
         ]);
         $data = $request->all();
-
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request->file('avatar')->store('uploads/dogs/avatars');
-        }else{
+        } else {
             unset($data['avatar']);
         }
 
-        Dog::create($data);
+        $dog = Dog::create($data);
+        if (!array_key_exists('vaccines', $data))
+            $data['vaccines'] = [];
+
+        $dog->vaccines()->sync($data['vaccines']);
+
         return redirect('dogs');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,21 +81,23 @@ class DogsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $dog = Dog::where('id',$id)->first();
-        $owners = User::where('type',2)->get();
-        return view('pages.dogs.edit',compact('dog','owners'));
+        $vaccines = Vaccine::all();
+        $dog = Dog::where('id', $id)->with('vaccines')->first();
+        $owners = User::where('type', 2)->get();
+
+        return view('pages.dogs.edit', compact('dog', 'owners', 'vaccines'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Dog $dog)
@@ -104,11 +113,12 @@ class DogsController extends Controller
 
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request->file('avatar')->store('uploads/dogs/avatars');
-        }else{
+        } else {
             unset($data['avatar']);
         }
 //        return $data;
         $dog->update($data);
+        $dog->vaccines()->sync($data['vaccines']);
 
         return redirect('dogs');
     }
@@ -116,7 +126,7 @@ class DogsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Dog $dog)

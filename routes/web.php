@@ -46,6 +46,7 @@ Route::prefix('log')->name('log.')->group(function () {
 Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('users', UsersController::class);
     Route::resource('trainers', UsersController::class)->parameters(['trainers' => 'user']);
+    Route::resource('doctors', UsersController::class)->parameters(['doctors' => 'user']);
     Route::resource('admins', UsersController::class)->parameters(['admins' => 'user']);
 });
 

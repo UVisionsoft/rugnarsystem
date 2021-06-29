@@ -15,4 +15,11 @@ class Dog extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function vaccines()
+    {
+        return $this->belongsToMany(Vaccine::class, 'dog_vaccines','dog_id','vaccine_id')->withPivot('status');
+    }
+
+//    public function
 }
