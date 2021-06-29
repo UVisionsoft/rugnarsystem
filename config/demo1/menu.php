@@ -90,6 +90,12 @@ return array(
             'path'  => '/activities',
             'icon'  => Theme::getSvgIcon("icons/duotone/dog.svg", "svg-icon-2"),
         ),
+        // Vacciones
+        array(
+            'title' => 'التطعيمات',
+            'path'  => '/vaccines',
+            'icon'  => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
+        ),
         // System
         array(
             'title'      => 'System',

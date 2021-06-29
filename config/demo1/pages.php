@@ -161,13 +161,13 @@ return array(
         ),
     ),
 
-    'activities' => array(
-        'title'  => 'التدريبات',
+    'vaccines' => array(
+        'title'  => 'التطعيمات',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
-                'title' => 'تدريب جديد',
-                'url' => '/activities/create',
+                'title' => 'تطعيم جديد',
+                'url' => '/vaccines/create',
             ]
         ],
         'assets' => array(

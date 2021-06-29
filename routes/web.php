@@ -53,4 +53,6 @@ Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 Route::resource('activities',\App\Http\Controllers\Activities\ActivitiesController::class);
 
+Route::resource('vaccines',\App\Http\Controllers\Vaccines\VaccinesController::class);
+
 require __DIR__.'/auth.php';
