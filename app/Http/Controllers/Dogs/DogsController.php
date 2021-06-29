@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dogs;
 
 use App\DataTables\DogsDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DogRequest;
 use App\Models\Dog;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DogsController extends Controller
@@ -28,7 +30,8 @@ class DogsController extends Controller
      */
     public function create()
     {
-        //
+        $owners = User::where('type',2)->get();
+        return view('pages.dogs.create',compact('owners'));
     }
 
     /**
@@ -39,7 +42,22 @@ class DogsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'avatar' => ['image'],
+            'age' => ['required', 'numeric'],
+            'user_id' => ['required'],
+        ]);
+        $data = $request->all();
+
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('uploads/dogs/avatars');
+        }else{
+            unset($data['avatar']);
+        }
+
+        Dog::create($data);
+        return redirect('dogs');
     }
 
     /**
@@ -61,7 +79,9 @@ class DogsController extends Controller
      */
     public function edit($id)
     {
-        return "edit dog".$id;
+        $dog = Dog::where('id',$id)->first();
+        $owners = User::where('type',2)->get();
+        return view('pages.dogs.edit',compact('dog','owners'));
     }
 
     /**
@@ -71,9 +91,26 @@ class DogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dog $dog)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'age' => ['required', 'numeric'],
+            'user_id' => ['required'],
+            'avatar' => 'image'
+        ]);
+
+        $data = $request->all();
+
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $request->file('avatar')->store('uploads/dogs/avatars');
+        }else{
+            unset($data['avatar']);
+        }
+//        return $data;
+        $dog->update($data);
+
+        return redirect('dogs');
     }
 
     /**
@@ -82,8 +119,10 @@ class DogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dog $dog)
     {
-        //
+        $dog->delete();
+        return redirect('dogs');
+
     }
 }

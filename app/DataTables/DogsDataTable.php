@@ -23,7 +23,10 @@ class DogsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action', 'owner'])
+            ->rawColumns(['action', 'owner', 'avatar'])
+            ->editColumn('avatar', function ( $model) {
+                return '<img src="'.asset($model->avatar).'" width="50" height="50" class="rounded-circle">';
+            })
             ->editColumn('owner', function ( $model) {
                 return "<a href='".route('accounts.users.show', $model->user_id)."'>{$model->user->name}</a>";
             })
