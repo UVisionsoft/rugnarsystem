@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivitySessions extends Model
+class ActivityReport extends Model
 {
     use HasFactory;
+    protected $table = 'activity_reports';
 
     public function trainer()
     {
@@ -16,6 +17,6 @@ class ActivitySessions extends Model
 
     public function activity()
     {
-        return $this->belongsTo(DogActivities::class, 'dog_activity_id');
+        return $this->belongsTo(DogActivity::class, 'dog_activity_id');
     }
 }

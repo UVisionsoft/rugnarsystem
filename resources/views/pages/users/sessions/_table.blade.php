@@ -10,20 +10,23 @@
     <script src="{{asset('plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script type="text/javascript">
         $(function () {
-            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-
-            LaravelDataTables['activities-table'].on('click', '[data-destroy]', function (e) {
-                e.preventDefault();
-                if (!confirm("{{ __('هل انت متأكد من الحذف ؟') }}")) {
-                    return;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 }
+            });
+
+            LaravelDataTables['activities-table'].on('click', '[data-change-status]', function (e) {
+                e.preventDefault();
 
                 $.ajax({
-                    url: $(this).data('destroy'),
-                    type: 'DELETE',
-                    dataType: 'JSON',
+                    url: $(this).data('change-status'),
+                    type: 'PATCH',
                     data: {
-                        '_method': 'DELETE',
+                        "_method": "PATCH",
+                        "activity_id" : $(this).data("activity-id"),
+                        "trainer_id" : $(this).data("trainer-id"),
+                        "status" : $(this).data("status")
                     },
                     complete: function () {
                         LaravelDataTables['activities-table'].ajax.reload();

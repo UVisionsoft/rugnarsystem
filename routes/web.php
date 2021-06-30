@@ -47,7 +47,8 @@ Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('users', UsersController::class);
 
     Route::resource('trainers', UsersController::class)->parameters(['trainers' => 'user']);
-    Route::resource('trainers.sessions', SessionsController::class);
+    Route::get('trainers/{trainer}/sessions',[ SessionsController::class, 'index'])->name('trainers.sessions.index');
+    Route::patch('trainers/{trainer}/sessions',[ SessionsController::class, 'update'])->name('trainers.sessions.update');
 
 
     Route::resource('doctors', UsersController::class)->parameters(['doctors' => 'user']);
@@ -62,6 +63,6 @@ Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
 
-//Route::get('activity/session',[\App\Http\Controllers\ActivitySessions\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
+//Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
 require __DIR__.'/auth.php';

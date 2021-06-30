@@ -20,6 +20,7 @@ class CreateActivitySessionsTable extends Migration
             $table->unsignedBigInteger('trainer_id');
             $table->foreign('trainer_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('duration');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

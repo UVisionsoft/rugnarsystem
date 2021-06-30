@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Core\Adapters\Theme;
 use App\DataTables\ActivitySessionsDataTable;
-use App\Models\ActivitySessions;
+use App\Models\ActivitySession;
 use App\Models\Dog;
 
 class PagesController extends Controller

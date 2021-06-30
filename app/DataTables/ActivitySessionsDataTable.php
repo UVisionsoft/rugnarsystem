@@ -2,7 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Models\ActivitySessions;
+use App\Models\ActivityReport;
+use App\Models\ActivitySession;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -25,15 +26,20 @@ class ActivitySessionsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action'])
-            ->addColumn('dog', function (ActivitySessions $model){
+            ->rawColumns(['action','session_status'])
+            ->addColumn('dog', function (ActivityReport $model){
                 return $model->activity->dog->name;
             })
-            ->addColumn('training', function (ActivitySessions  $model){
+            ->addColumn('training', function (ActivityReport  $model){
                 return $model->activity->training->name;
-
             })
-            ->addColumn('action', function (ActivitySessions  $model) {
+            ->addColumn('remaining', function (ActivityReport  $model){
+                return $model->activity->remaining_hours;
+            })
+            ->addColumn('session_status', function (ActivityReport  $model){
+                return '<div class="badge badge-light-' . ($model->session_status == 0 ?"danger":"success") . ' fw-bolder">' . ($model->session_status == 0 ? "غير مكتمل":"مكتمل") . '</div>';
+            })
+            ->addColumn('action', function (ActivityReport  $model) {
                 return view('pages.users.sessions._action-menu', compact('model'));
             });
     }
@@ -41,16 +47,18 @@ class ActivitySessionsDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param  ActivitySessions  $model
+     * @param  ActivitySession  $model
      *
      * @return Collection
      */
-    public function query(ActivitySessions $model)
+    public function query(ActivityReport $model)
     {
+        $trainer = $this->trainer;
         if($this->trainer instanceof Model)
-            return ActivitySessions::where('trainer_id', $this->trainer->id);
+            $trainer = $this->trainer->id;
 
-        return ActivitySessions::where('trainer_id', $this->trainer);
+            return ActivityReport::where('trainer_id', $trainer)->where('created_at', now()->toDateString());
+
     }
 
     /**
@@ -96,10 +104,11 @@ class ActivitySessionsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('#'),
             Column::make('dog')->title('اسم الكلب'),
             Column::make('training')->title('التدريب'),
-            Column::make('duration')->title('مدة التدريب'),
+            Column::make('hours_taken')->title('مدة التدريب'),
+            Column::make('remaining')->title('المتبقي'),
+            Column::make('session_status')->title('حالة التدريب'),
             Column::computed('action')->title('خيارات')
                 ->exportable(false)
                 ->printable(false)

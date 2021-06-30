@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DogActivities extends Model
+class DogActivity extends Model
 {
     use HasFactory;
 
@@ -17,5 +17,17 @@ class DogActivities extends Model
     public function training()
     {
         return $this->belongsTo(Activity::class, 'activity_id');
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(ActivitySession::class);
+    }
+
+    public function getRemainingHoursAttribute()
+    {
+        $totalSessions = $this->sessions()->sum('duration');
+
+        return (int)$this->duration - (int)$totalSessions ;
     }
 }
