@@ -107,7 +107,7 @@
                         @foreach($activities as $activity_id => $activity)
                             <div class="form-group pt-5">
                                 <label for="">{{$activity}}</label>
-                                <input placeholder="عدد الساعات" type="number" name="activities[{{$activity_id}}][duration]" class="form-control" step="1" min="0">
+                                <input placeholder="عدد الساعات" type="number" name="activities[{{$activity_id}}][duration]" class="form-control" step="1" min="0" value="0">
                             </div>
                         @endforeach
                     </div>

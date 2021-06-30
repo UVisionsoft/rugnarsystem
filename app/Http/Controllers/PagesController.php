@@ -22,12 +22,12 @@ class PagesController extends Controller
             if (view()->exists('pages.' . $view)) {
                 return view('pages.' . $view);
             }
-        } elseif (auth()->user()->type == 1) {
+        } elseif (auth()->user()->type == 2) { // USER
 
             $dogs = Dog::where('user_id',auth()->id())->get();
             return view('pages.dashboard.user',compact('dogs'));
 
-        } elseif (auth()->user()->type == 2) {
+        } elseif (auth()->user()->type == 1) { // TRAINER
 
             return $dataTable->trainer(auth()->id())->render('pages.users.sessions.index');
 //            return view('pages.dashboard.trainer');
