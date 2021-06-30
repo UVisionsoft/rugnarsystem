@@ -64,4 +64,6 @@ Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::c
 
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySessions\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
+Route::get('dogs/{id}/profile',[\App\Http\Controllers\Dogs\DogsController::class,'profile'])->name('dogs.profile');
+
 require __DIR__.'/auth.php';

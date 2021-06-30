@@ -15,7 +15,7 @@
         <tr>
             <td>{{++$key}}</td>
             <td>{{$dog->name}}</td>
-            <td><a class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a></td>
+            <td><a class="btn btn-primary btn-sm" href="{{route('dogs.profile',$dog->id)}}"><i class="fas fa-eye"></i></a></td>
         </tr>
         @endforeach
     </table>

@@ -147,4 +147,10 @@ class DogsController extends Controller
         return redirect('dogs');
 
     }
+
+    public function profile($id){
+
+        $dog = Dog::with('user')->where('id',$id)->first();
+        return view('pages.dogs.profile',compact('dog'));
+    }
 }
