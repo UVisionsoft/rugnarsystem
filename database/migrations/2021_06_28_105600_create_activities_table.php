@@ -17,7 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('url')->default('');
+            $table->string('url')->nullable()->default(null);
             $table->timestamps();
         });
     }

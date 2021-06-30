@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('plugins/custom/datatables/datatables.bundle.css')}}">
 <!--begin::Table-->
 {{ $dataTable->table() }}
 <!--end::Table-->
@@ -6,6 +7,7 @@
 @section('scripts')
     {{ $dataTable->scripts() }}
 
+    <script src="{{asset('plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script type="text/javascript">
         $(function () {
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});

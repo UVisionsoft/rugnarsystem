@@ -1,5 +1,5 @@
 <!--begin::Table-->
-{{ $dataTable->table(['id'=>'users-log-table']) }}
+{{ $dataTable->table(['id'=>'user-table']) }}
 <!--end::Table-->
 
 {{-- Inject Scripts --}}

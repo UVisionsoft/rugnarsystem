@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\ActivitySessions;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException;
@@ -12,6 +13,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class ActivitySessionsDataTable extends DataTable
 {
+    protected $trainer;
     /**
      * Build DataTable class.
      *
@@ -24,8 +26,15 @@ class ActivitySessionsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action'])
-            ->addColumn('action', function ($model) {
-                return view('pages.actvity_session._action-menu', compact('model'));
+            ->addColumn('dog', function (ActivitySessions $model){
+                return $model->activity->dog->name;
+            })
+            ->addColumn('training', function (ActivitySessions  $model){
+                return $model->activity->training->name;
+
+            })
+            ->addColumn('action', function (ActivitySessions  $model) {
+                return view('pages.users.sessions._action-menu', compact('model'));
             });
     }
 
@@ -38,8 +47,10 @@ class ActivitySessionsDataTable extends DataTable
      */
     public function query(ActivitySessions $model)
     {
+        if($this->trainer instanceof Model)
+            return ActivitySessions::where('trainer_id', $this->trainer->id);
 
-        return $model->newQuery();
+        return ActivitySessions::where('trainer_id', $this->trainer);
     }
 
     /**
@@ -50,7 +61,7 @@ class ActivitySessionsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('system-log-table')
+            ->setTableId('activities-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(3)
@@ -70,6 +81,13 @@ class ActivitySessionsDataTable extends DataTable
 }");
     }
 
+    public function trainer($trainer)
+    {
+        $this->trainer = $trainer;
+
+        return $this;
+    }
+
     /**
      * Get columns.
      *
@@ -79,9 +97,9 @@ class ActivitySessionsDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#'),
-            Column::make('dog_activity_id')->title('التدريب'),
-            Column::make('trainer_id')->title('المدرب'),
-            Column::make('duration')->title('الفترة الزمنية'),
+            Column::make('dog')->title('اسم الكلب'),
+            Column::make('training')->title('التدريب'),
+            Column::make('duration')->title('مدة التدريب'),
             Column::computed('action')->title('خيارات')
                 ->exportable(false)
                 ->printable(false)

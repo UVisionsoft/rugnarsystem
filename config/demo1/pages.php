@@ -112,6 +112,7 @@ return array(
                 'title' => 'تعديل مدير',
             ]
         ),
+
         'trainers' => array(
             'title' => 'قائمة المدربين',
             'top_bar' => [

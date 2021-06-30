@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Documentation\ReferencesController;
-use App\Http\Controllers\Users\UsersController;
+use App\Http\Controllers\Users\{UsersController, SessionsController};
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +45,11 @@ Route::prefix('log')->name('log.')->group(function () {
 
 Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('users', UsersController::class);
+
     Route::resource('trainers', UsersController::class)->parameters(['trainers' => 'user']);
+    Route::resource('trainers.sessions', SessionsController::class);
+
+
     Route::resource('doctors', UsersController::class)->parameters(['doctors' => 'user']);
     Route::resource('admins', UsersController::class)->parameters(['admins' => 'user']);
 });
@@ -58,6 +62,6 @@ Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
 
-Route::get('activity/session',[\App\Http\Controllers\ActivitySessions\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
+//Route::get('activity/session',[\App\Http\Controllers\ActivitySessions\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
 require __DIR__.'/auth.php';
