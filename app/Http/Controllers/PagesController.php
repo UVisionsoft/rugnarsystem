@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Core\Adapters\Theme;
+use App\Models\Dog;
 
 class PagesController extends Controller
 {
@@ -15,8 +16,19 @@ class PagesController extends Controller
         $view = $theme->getOption('page', 'view');
 
         // Check if the page view file exist
-        if (view()->exists('pages.'.$view)) {
-            return view('pages.'.$view);
+        if (auth()->user()->type == 0) {
+            if (view()->exists('pages.' . $view)) {
+                return view('pages.' . $view);
+            }
+        } elseif (auth()->user()->type == 1) {
+
+            $dogs = Dog::where('user_id',auth()->id())->get();
+            return view('pages.dashboard.user',compact('dogs'));
+
+        } elseif (auth()->user()->type == 2) {
+
+            return view('pages.dashboard.trainer');
+
         }
 
         // Get the default inner page
