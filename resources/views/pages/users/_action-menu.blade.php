@@ -1,7 +1,7 @@
 <!--begin::Action--->
 <td class="text-end">
     @if($model->type == 1)
-        <a href="{{ route('accounts.'.$model::$types[$model->type].'s.edit', $model->id) }}" class="btn btn-icon btn-sm btn-primary btn-active-light-primary">
+        <a href="{{ route('activity.sessions') }}" class="btn btn-icon btn-sm btn-primary btn-active-light-primary">
             <i class="fa fa-tasks"></i>
         </a>
     @endif
