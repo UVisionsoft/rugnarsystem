@@ -7,6 +7,7 @@ use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Jackiedo\LogReader\LogReader;
@@ -97,7 +98,7 @@ class UsersController extends Controller
         ]);
 
         if($request->filled('password')){
-            $request->merge(['password'=> bcrypt($request->get('password'))]);
+            $request->merge(['password'=> Hash::make($request->get('password'))]);
         } else {
             $request->request->remove('password');
         }
