@@ -32,11 +32,7 @@ class SessionsController extends Controller
 
     public function create(User $trainer, Request $request)
     {
-        $activities = Activity::pluck('name', 'id');
-
-        if($request->wantsJson()){
-            return Activity::with('DogActivity.dog')->get();
-        }
+        $activities = Activity::with('DogActivity.dog')->get();
 
         return View('pages.users.sessions.create', compact('trainer', 'activities'));
     }
@@ -44,7 +40,21 @@ class SessionsController extends Controller
 
     public function store(User $trainer, Request $request)
     {
-
+        $dogs_activities = $request->get('dogs_activities');
+        $sessions = [];
+        foreach ($dogs_activities as $dogs_activity){
+            $sessions[] = ActivitySession::create([
+                'dog_activity_id'=>$dogs_activity['id'],
+                'trainer_id'=> $trainer->id ?? auth()->id(),
+                'duration'=> $request->get('hours'),
+                'status'=> 0,
+            ]);
+        }
+        return response()->json([
+            'message'=> __('Sessions registered Successfully'),
+            'data'=>$sessions,
+            'to'=> route('accounts.trainers.sessions.index', $trainer->id)
+        ]);
     }
 
 //    public function activitySessions(ActivitySessionsDataTable $dataTable){
