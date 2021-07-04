@@ -2,7 +2,7 @@
     @section('page-title', 'جلسات تدريب المدرب')
     @section('top_bar')
             <div data-bs-toggle="tooltip" data-bs-placement="left" data-bs-trigger="hover" title="تسجيل جلسة تدريب جديدة">
-                <a href="{{route('accounts.trainers.sessions.create', $trainer->id)}}" class="btn btn-sm btn-primary fw-bolder">
+                <a href="{{route('accounts.trainers.sessions.create', $trainer->id ?? auth()->id())}}" class="btn btn-sm btn-primary fw-bolder">
                     جلسة جديدة
                 </a>
             </div>

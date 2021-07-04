@@ -42,6 +42,10 @@ class SessionsController extends Controller
     }
 
 
+    public function store(User $trainer, Request $request)
+    {
+
+    }
 
 //    public function activitySessions(ActivitySessionsDataTable $dataTable){
 //
