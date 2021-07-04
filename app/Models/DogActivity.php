@@ -9,6 +9,8 @@ class DogActivity extends Model
 {
     use HasFactory;
 
+    protected $appends = ['remaining_hours'];
+
     public function dog()
     {
         return $this->belongsTo(Dog::class);

@@ -2,9 +2,14 @@
 <div class="toolbar" id="kt_toolbar">
     <!--begin::Container-->
     <div id="kt_toolbar_container" class="{{ theme()->printHtmlClasses('toolbar-container', false) }} d-flex flex-stack">
-        {{ theme()->getView('layout/page-title/_default') }}
-
-		<!--begin::Actions-->
+        @if (!empty($__env->yieldContent('page-title')))
+            <h1 class="d-flex align-items-right text-dark fw-bolder my-1 fs-4 lh-1">
+                @yield('page-title')
+            </h1>
+        @else
+            {{ theme()->getView('layout/page-title/_default') }}
+		@endif
+        <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
             <!--begin::Wrapper-->
 {{--            <div class="me-4">--}}
@@ -26,6 +31,7 @@
                 </a>
             </div>
             @endif
+            @yield('top_bar')
             <!--end::Wrapper-->
         </div>
 		<!--end::Actions-->

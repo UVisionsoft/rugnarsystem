@@ -49,6 +49,8 @@ Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('trainers', UsersController::class)->parameters(['trainers' => 'user']);
     Route::get('trainers/{trainer}/sessions',[ SessionsController::class, 'index'])->name('trainers.sessions.index');
     Route::patch('trainers/{trainer}/sessions',[ SessionsController::class, 'update'])->name('trainers.sessions.update');
+    Route::get('trainers/{trainer}/sessions/create',[ SessionsController::class, 'create'])->name('trainers.sessions.create');
+    Route::post('trainers/{trainer}/sessions',[ SessionsController::class, 'store'])->name('trainers.sessions.store');
 
 
     Route::resource('doctors', UsersController::class)->parameters(['doctors' => 'user']);
@@ -62,6 +64,8 @@ Route::resource('vaccines',\App\Http\Controllers\Vaccines\VaccinesController::cl
 Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
+
+
 
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 

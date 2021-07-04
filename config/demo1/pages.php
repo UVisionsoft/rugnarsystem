@@ -124,6 +124,16 @@ return array(
             ],
             'create'=>[
                 'title' => 'تسجيل مدرب جديد',
+            ],
+            '*.sessions'=>[
+                'title' => 'قائمة المدربين',
+                'top_bar' => [
+                    'create' => [
+                        'caption' => 'إضافة جديد',
+                        'title' => 'مدرب جديد',
+                        'url' => '/accounts/trainers/create',
+                    ]
+                ],
             ]
         ),
         'users' => array(

@@ -10,4 +10,10 @@ class Activity extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'url'];
+
+    public function DogActivity()
+    {
+        return $this->hasMany(DogActivity::class);
+    }
+
 }
