@@ -26,6 +26,9 @@
                     complete: function () {
                         LaravelDataTables['activities-table'].ajax.reload();
                     },
+                    error: function (error){
+                        alert('عفواً لا يمكنك حذف هذا التدريب لوجود بيانات متعلقة')
+                    }
                 });
             });
         });

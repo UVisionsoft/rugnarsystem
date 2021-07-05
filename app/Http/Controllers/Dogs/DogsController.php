@@ -84,9 +84,14 @@ class DogsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dog $dog)
     {
-        //
+        $dog->load('user');
+        $dog_activities = DogActivity::where('dog_id',$dog->id)->with('training')->with('sessions')->get();
+//        return $dog_activities;
+        $dog_vaccines = DogVaccines::where('dog_id',$dog->id)->with('vaccines')->get();
+//        return $dog_vaccines;
+        return view('pages.dogs.show',compact('dog','dog_activities','dog_vaccines'));
     }
 
     /**
@@ -151,10 +156,6 @@ class DogsController extends Controller
 
     public function profile($id){
 
-        $dog = Dog::with('user')->where('id',$id)->first();
-        $dog_activities = DogActivity::where('dog_id',$id)->with('training')->with('sessions')->get();
-        $dog_vaccines = DogVaccines::where('dog_id',$id)->with('vaccines')->get();
-//        return $dog_vaccines;
-        return view('pages.dogs.profile',compact('dog','dog_activities','dog_vaccines'));
+
     }
 }

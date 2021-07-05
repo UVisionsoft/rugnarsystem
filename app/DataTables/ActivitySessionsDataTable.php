@@ -27,9 +27,9 @@ class ActivitySessionsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action','session_status'])
+            ->rawColumns(['action','session_status', 'dog'])
             ->addColumn('dog', function (ActivityReport $model){
-                return $model->activity->dog->name;
+                return "<a href='" . route('dogs.show', $model->activity->dog->id) . "'>{$model->activity->dog->name}</a>";
             })
             ->addColumn('training', function (ActivityReport  $model){
                 return $model->activity->training->name;

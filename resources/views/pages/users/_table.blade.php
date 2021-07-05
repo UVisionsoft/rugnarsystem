@@ -10,7 +10,7 @@
         $(function () {
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
-            LaravelDataTables['users-log-table'].on('click', '[data-destroy]', function (e) {
+            LaravelDataTables['user-table'].on('click', '[data-destroy]', function (e) {
                 e.preventDefault();
                 if (!confirm("{{ __('هل انت متأكد من الحذف ؟') }}")) {
                     return;
@@ -24,7 +24,7 @@
                         '_method': 'DELETE',
                     },
                     complete: function () {
-                        LaravelDataTables['users-log-table'].ajax.reload();
+                        LaravelDataTables['user-table'].ajax.reload();
                     },
                 });
             });

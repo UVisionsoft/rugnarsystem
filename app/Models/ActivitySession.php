@@ -13,7 +13,11 @@ class ActivitySession extends Model
 
     public function trainer()
     {
-        return $this->belongsTo(User::class, 'trainer_id');
+        return $this->belongsTo(User::class, 'trainer_id')->withDefault([
+            'id'=> null,
+            'name'=> 'مدرب راجنر',
+            'email'=> 'trainer@rugnar.com',
+        ]);
     }
 
     public function activity()

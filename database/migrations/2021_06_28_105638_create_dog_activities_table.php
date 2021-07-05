@@ -18,7 +18,7 @@ class CreateDogActivitiesTable extends Migration
             $table->unsignedBigInteger('dog_id');
             $table->foreign('dog_id')->references('id')->on('dogs')->onDelete('cascade');
             $table->unsignedBigInteger('activity_id');
-            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            $table->foreign('activity_id')->references('id')->on('activities')->restrictOnDelete();
             $table->integer('duration');
             $table->timestamps();
         });

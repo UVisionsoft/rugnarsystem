@@ -17,8 +17,8 @@ class CreateActivitySessionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('dog_activity_id');
             $table->foreign('dog_activity_id')->references('id')->on('dog_activities')->onDelete('cascade');
-            $table->unsignedBigInteger('trainer_id');
-            $table->foreign('trainer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('trainer_id')->nullable()->default(null);
+            $table->foreign('trainer_id')->references('id')->on('users')->nullOnDelete();
             $table->integer('duration');
             $table->boolean('status');
             $table->timestamps();

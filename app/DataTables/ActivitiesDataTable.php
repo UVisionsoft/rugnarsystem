@@ -26,7 +26,10 @@ class ActivitiesDataTable extends DataTable
             ->eloquent($query)
             ->rawColumns(['action', 'url'])
             ->editColumn('url', function (Activity $model) {
-                return sprintf("<a href='%s' target='_blank' >عرض الفيديو</a>", $model->url);
+                if($model->url)
+                    return sprintf("<a href='%s' target='_blank' >عرض الفيديو</a>", $model->url);
+
+                return "<span class='badge badge-danger'> لا يوجد </span>";
             })
             ->addColumn('action', function (Activity $model) {
                 return view('pages.activities._action-menu', compact('model'));

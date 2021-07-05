@@ -26,5 +26,7 @@ class Dog extends Model
         return $this->belongsToMany(Activity::class, 'dog_activities', 'dog_id', 'activity_id')->withPivot('duration');
     }
 
+
+
 //    public function
 }
