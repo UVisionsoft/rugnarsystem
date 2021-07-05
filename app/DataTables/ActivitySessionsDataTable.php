@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\ActivityReport;
 use App\Models\ActivitySession;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class ActivitySessionsDataTable extends DataTable
 {
-    protected $trainer;
+    protected $trainer, $date;
     /**
      * Build DataTable class.
      *
@@ -39,6 +40,9 @@ class ActivitySessionsDataTable extends DataTable
             ->addColumn('session_status', function (ActivityReport  $model){
                 return '<div class="badge badge-light-' . ($model->session_status == 0 ?"danger":"success") . ' fw-bolder">' . ($model->session_status == 0 ? "غير مكتمل":"مكتمل") . '</div>';
             })
+            ->editColumn('created_at', function (ActivityReport  $model){
+                return $model->created_at->toDateString();
+            })
             ->addColumn('action', function (ActivityReport  $model) {
                 return view('pages.users.sessions._action-menu', compact('model'));
             });
@@ -57,8 +61,11 @@ class ActivitySessionsDataTable extends DataTable
         if($this->trainer instanceof Model)
             $trainer = $this->trainer->id;
 
-            return ActivityReport::where('trainer_id', $trainer)->where('created_at', now()->toDateString());
+        $query = ActivityReport::where('trainer_id', $trainer);
+        if($this->date)
+            $query = $query->where('created_at', $this->date);
 
+        return $query;
     }
 
     /**
@@ -72,7 +79,7 @@ class ActivitySessionsDataTable extends DataTable
             ->setTableId('activities-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(3)
+            ->orderBy(5)
             ->responsive()
             ->autoWidth(false)
             ->dom("<f<t>
@@ -96,6 +103,14 @@ class ActivitySessionsDataTable extends DataTable
         return $this;
     }
 
+    public function date(Carbon $date = null)
+    {
+        if($date)
+            $this->date = $date->toDateString();
+
+        return $this;
+    }
+
     /**
      * Get columns.
      *
@@ -109,6 +124,7 @@ class ActivitySessionsDataTable extends DataTable
             Column::make('hours_taken')->title('مدة التدريب'),
             Column::make('remaining')->title('المتبقي'),
             Column::make('session_status')->title('حالة التدريب'),
+            Column::make('created_at')->title('تاريخ التدريب'),
             Column::computed('action')->title('خيارات')
                 ->exportable(false)
                 ->printable(false)

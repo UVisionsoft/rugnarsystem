@@ -9,6 +9,7 @@ use App\Models\ActivityReport;
 use App\Models\ActivitySession;
 use App\Models\DogActivity;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -40,6 +41,7 @@ class SessionsController extends Controller
 
     public function store(User $trainer, Request $request)
     {
+        $date = Carbon::make($request->get('date'));
         $dogs_activities = $request->get('dogs_activities');
         $sessions = [];
         foreach ($dogs_activities as $dogs_activity){
@@ -48,6 +50,8 @@ class SessionsController extends Controller
                 'trainer_id'=> $trainer->id ?? auth()->id(),
                 'duration'=> $request->get('hours'),
                 'status'=> 0,
+                'created_at'=> $date,
+                'updated_at'=> $date
             ]);
         }
         return response()->json([

@@ -97,23 +97,6 @@
                     <!--end::Card body-->
                 </div>
 
-                <div class="card card-custom gutter-b example example-compact">
-                    <!--begin::Card body-->
-
-                    <div class="card-header">
-                        <h3 class="card-title">تدريبات الكلب</h3>
-                    </div>
-                    <div class="card-body pt-6">
-                        @foreach($activities as $activity_id => $activity)
-                            <div class="form-group pt-5">
-                                <label for="">{{$activity}}</label>
-                                <input placeholder="عدد الساعات" type="number" name="activities[{{$activity_id}}][duration]" class="form-control" step="1" min="0" value="0">
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <!--end::Card body-->
-                </div>
             </div>
         </div>
     </form>

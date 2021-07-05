@@ -103,6 +103,7 @@ class UsersController extends Controller
         } else {
             $request->request->remove('password');
         }
+
         $user->update($request->all());
 
         return redirect('accounts/' . $request->segment(2));

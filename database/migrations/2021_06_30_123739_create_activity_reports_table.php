@@ -38,20 +38,19 @@ SQL;
 
     protected function createView(): string
     {
-        return <<<SQL
+return <<<SQL
         CREATE VIEW `activity_reports` AS
         SELECT
             trainer_id,
             dog_activity_id,
             SUM(duration) AS hours_taken,
-            MIN(status) AS session_status,
-            date(created_at) as created_at
+            MIN(STATUS) AS session_status,
+            DATE(created_at) AS created_at
         FROM
             `activity_sessions`
-        WHERE date(created_at) = curdate()
-
         GROUP BY
             dog_activity_id,
+            created_at,
             trainer_id
 SQL;
     }

@@ -1,5 +1,5 @@
 <x-base-layout>
-    @section('page-title', 'تسجيل جلسة جديدة')
+    @section('page-title', sprintf(" تسجيل جلسة جديدة ( %s ) ", $trainer->name))
     <div id="example"></div>
 
 
@@ -9,18 +9,24 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">التدريب</label>
                                 <select v-model="activity" class="form-control form-control-solid">
-                                    <option disabled value="">من فضلك اختر التدريب</option>
+                                    <option v-bind:value="null" :value="null" disabled>من فضلك اختر التدريب</option>
                                     <option v-bind:value="activity.id" v-for="activity in activities">
                                         @{{activity.name}}
                                     </option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">التاريخ</label>
+                                <input type="date" class="form-control form-control-solid" v-model="date">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">عدد الساعات</label>
                                 <input type="number" class="form-control form-control-solid" v-model="hours">
@@ -54,6 +60,7 @@
             el: '#example',
             data: {
                 hours: 1,
+                date: null,
                 activity: null,
                 selected: [],
                 activities: @json($activities),
@@ -88,7 +95,8 @@
                         body: JSON.stringify({
                             hours: this.hours,
                             dogs_activities: this.selected,
-                            activity: this.activity
+                            activity: this.activity,
+                            date: this.date
                         })
                     };
 

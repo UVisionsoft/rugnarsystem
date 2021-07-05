@@ -9,7 +9,7 @@ class ActivitySession extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['dog_activity_id','trainer_id', 'duration', 'status'];
+    protected $fillable = ['dog_activity_id','trainer_id', 'duration', 'status', 'created_at', 'updated_at'];
 
     public function trainer()
     {
