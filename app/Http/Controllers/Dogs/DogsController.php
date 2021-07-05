@@ -8,6 +8,7 @@ use App\Http\Requests\DogRequest;
 use App\Models\Activity;
 use App\Models\Dog;
 use App\Models\DogActivity;
+use App\Models\DogVaccines;
 use App\Models\User;
 use App\Models\Vaccine;
 use Illuminate\Http\Request;
@@ -152,7 +153,8 @@ class DogsController extends Controller
 
         $dog = Dog::with('user')->where('id',$id)->first();
         $dog_activities = DogActivity::where('dog_id',$id)->with('training')->with('sessions')->get();
-//        return $dog_activities[0]["sessions"];
-        return view('pages.dogs.profile',compact('dog','dog_activities'));
+        $dog_vaccines = DogVaccines::where('dog_id',$id)->with('vaccines')->get();
+//        return $dog_vaccines;
+        return view('pages.dogs.profile',compact('dog','dog_activities','dog_vaccines'));
     }
 }
