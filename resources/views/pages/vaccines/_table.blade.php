@@ -1,9 +1,12 @@
+<link rel="stylesheet" href="{{asset('plugins/custom/datatables/datatables.bundle.css')}}">
+
 <!--begin::Table-->
 {{ $dataTable->table() }}
 <!--end::Table-->
 
 {{-- Inject Scripts --}}
 @section('scripts')
+    <script src="{{asset('plugins/custom/datatables/datatables.bundle.js')}}"></script>
     {{ $dataTable->scripts() }}
 
     <script type="text/javascript">

@@ -5,7 +5,7 @@
         <!--begin::Card body-->
 
         <div class="card-header">
-            <h3 class="card-title">مدير جديد</h3>
+            <h3 class="card-title">{{$type}} جديد </h3>
         </div>
         <form action="{{route('accounts.'.request()->segment(2).'.store')}}" method="post">
             @csrf

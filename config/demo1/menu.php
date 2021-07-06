@@ -47,7 +47,7 @@ return array(
                         ),
                     ),
                     array(
-                        'title'      => 'مدرب',
+                        'title'      => 'مدربين الكلاب',
                         'path'       => 'accounts/trainers',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(
@@ -61,7 +61,21 @@ return array(
                         ),
                     ),
                     array(
-                        'title'      => 'مدير',
+                        'title'      => 'الاطباء',
+                        'path'       => 'accounts/doctors',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "بيانات الاطباء",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
+                        'title'      => 'المديرين',
                         'path'       => 'accounts/admins',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         'attributes' => array(

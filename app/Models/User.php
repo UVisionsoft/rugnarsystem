@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    static $types = ['admin', 'trainer', 'user'];
+    static $types = ['admin', 'trainer', 'user', 'doctor'];
 
     /**
      * The attributes that are mass assignable.

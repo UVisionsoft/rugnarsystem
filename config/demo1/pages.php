@@ -112,7 +112,19 @@ return array(
                 'title' => 'تعديل مدير',
             ]
         ),
-
+        'doctors' => array(
+            'title' => 'قائمة الأطباء',
+            'top_bar' => [
+                'create' => [
+                    'caption' => 'إضافة جديد',
+                    'title' => 'طبيب جديد',
+                    'url' => '/accounts/doctors/create',
+                ]
+            ],
+            'create'=>[
+                'title' => 'تسجيل طبيب جديد',
+            ],
+        ),
         'trainers' => array(
             'title' => 'قائمة المدربين',
             'top_bar' => [
