@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Core\Adapters\Theme;
 use App\DataTables\ActivitySessionsDataTable;
+use App\DataTables\DoctorVisitsDataTable;
 use App\Models\ActivitySession;
 use App\Models\Dog;
 
@@ -12,7 +13,7 @@ class PagesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Theme $theme,ActivitySessionsDataTable $dataTable)
+    public function index(Theme $theme,ActivitySessionsDataTable $dataTable,DoctorVisitsDataTable $doctorVisitsDataTable)
     {
         // Get view file location from menu config
         $view = $theme->getOption('page', 'view');
@@ -31,6 +32,10 @@ class PagesController extends Controller
 
             return $dataTable->trainer(auth()->id())->render('pages.users.sessions.index');
 //            return view('pages.dashboard.trainer');
+        }
+        elseif(auth()->user()->type == 3){ // Doctor
+
+            return $doctorVisitsDataTable->render('pages.dashboard.doctor.index');
 
         }
 
