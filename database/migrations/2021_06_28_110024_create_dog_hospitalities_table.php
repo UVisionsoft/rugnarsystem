@@ -19,7 +19,6 @@ class CreateDogHospitalitiesTable extends Migration
             $table->foreign('dog_id')->references('id')->on('dogs')->onDelete('cascade');
             $table->timestamp('from')->nullable()->default(null);
             $table->timestamp('to')->nullable()->default(null);
-            $table->text('description');
             $table->timestamps();
         });
     }

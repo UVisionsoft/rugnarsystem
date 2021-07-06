@@ -65,7 +65,7 @@ Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
 
 Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
 
-
+Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityController::class);
 
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 

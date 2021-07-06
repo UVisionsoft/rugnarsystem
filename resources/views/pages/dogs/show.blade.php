@@ -7,6 +7,8 @@
                     <img src="{{asset($dog->avatar)}}" class="rounded-circle" height="120px" class="card-img-top"
                          alt="{{$dog->name}} Image">
                 </div>
+                <div class="col-md-1">
+                </div>
                 <div class="col-md-8">
                     <div class="card-body" style="margin-top: 20px;margin-right: 25px;">
                         <h5 class="card-title"> اسم الكلب : <span class="text-danger">{{$dog->name}}</span></h5>
@@ -18,7 +20,7 @@
             <hr>
             <h5 class="mt-5 mb-5">التدريبات</h5>
             <table class="table table-bordered table-borderless table-row-bordered table-striped">
-                @foreach($dog_activities as $activity)
+                @forelse($dog_activities as $activity)
                     <tr>
                         <td style="text-align: right ;margin-right: 5px"><h6>{{$activity->training->name}}</h6></td>
                         <td>اجمالي الساعات {{$activity->duration}}</td>
@@ -37,12 +39,14 @@
                         <td>ما تم تدريبة {{ $activity->duration - $activity->remaining_hours }} ساعة</td>
                         <td>المتبقي {{$activity->remaining_hours}} ساعة</td>
                     </tr>
-                @endforeach
+                @empty
+                    <h6>لايوجد تدريبات لهذا الكلب حتي الان</h6>
+                @endforelse
             </table>
             <hr>
             <h5 class="mt-5 mb-5">التطعيمات</h5>
             <table class="table table-bordered table-borderless table-row-bordered table-striped">
-                @foreach($dog_vaccines as $vaccine)
+                @forelse($dog_vaccines as $vaccine)
                     <tr>
                         <td>
                             <h6>{{$vaccine->vaccines->name}}</h6>
@@ -51,7 +55,9 @@
                         <td></td>
                         <td></td>
                     </tr>
-                @endforeach
+                @empty
+                    <h6>لايوجد تطعيمات لهذا الكلب حتي الان</h6>
+                @endforelse
             </table>
         </div>
     </div>
