@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class DogHospitality extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['dog_id','from','to'];
+
+    public function dog()
+    {
+        return $this->belongsTo(Dog::class);
+    }
+
 }

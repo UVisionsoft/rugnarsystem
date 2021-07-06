@@ -96,6 +96,12 @@ return array(
             'path'  => '/vaccines',
             'icon'  => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
         ),
+        // Hospitalities
+        array(
+            'title' => 'الاستضافات',
+            'path'  => '/hospitalities',
+            'icon'  => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
+        ),
     ),
 
     // Horizontal menu

@@ -212,5 +212,24 @@ return array(
                 ),
             ),
         ),
-
+    'hospitalities' => array(
+        'title'  => 'الاستضافات',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'استضافة جديدة',
+                'url' => '/hospitalities/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js'  => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+    ),
 );
