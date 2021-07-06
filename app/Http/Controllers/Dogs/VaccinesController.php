@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dogs;
 
-use App\DataTables\DogsDataTable;
 use App\DataTables\VaccinesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DogRequest;

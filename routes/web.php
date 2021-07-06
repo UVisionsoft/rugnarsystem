@@ -62,8 +62,8 @@ Route::resource('activities',\App\Http\Controllers\Activities\ActivitiesControll
 Route::resource('vaccines',\App\Http\Controllers\Vaccines\VaccinesController::class);
 
 Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
-
 Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
+Route::resource('dogs.activities',\App\Http\Controllers\Dogs\ActivitiesController::class);
 
 Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityController::class);
 

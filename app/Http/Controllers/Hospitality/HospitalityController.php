@@ -28,7 +28,7 @@ class HospitalityController extends Controller
     public function create()
     {
             $hosted_dogs_ids = DogHospitality::pluck('dog_id')->toArray();
-            $dogs = Dog::whereNotIN('id',$hosted_dogs_ids)->get();
+            $dogs = Dog::get();
             return view('pages.hospitality.create',compact('dogs'));
     }
 
@@ -42,9 +42,20 @@ class HospitalityController extends Controller
     {
         $request->validate([
             'dog_id' => 'required',
-            'from' => 'required',
-            'to' => 'required',
+            'from' => 'required|date|before:to',
+            'to' => 'required|date|after:from'
         ]);
+
+        $exists = DogHospitality::where('dog_id', $request->get('dog_id'))
+        ->where(function ($query) use( $request ) {
+           return $query->where('from', '<', $request->get('from'))->where('to', '>', $request->get('from'));
+        })
+        ->orWhere(function ($query) use( $request ) {
+            return $query->where('from', '<', $request->get('to'))->where('to', '>', $request->get('to'));
+        })->count();
+
+        if($exists)
+            return back()->withInput($request->all())->withErrors(['from'=> __('date already exists'), 'to'=>__('date already exists') ]);
 
         DogHospitality::create($request->all());
 
@@ -87,8 +98,8 @@ class HospitalityController extends Controller
     {
         $request->validate([
             'dog_id' => 'required',
-            'from' => 'required',
-            'to' => 'required'
+            'from' => 'required|date|before:to',
+            'to' => 'required|date|after:from'
         ]);
 
         $hospitality->update($request->all());

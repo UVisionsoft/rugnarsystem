@@ -24,6 +24,12 @@ class HospitalityDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action','dog_id'])
+            ->editColumn('from',function ($model){
+                return $model->from->toDateString();
+            })
+            ->editColumn('to',function ($model){
+                return $model->to->toDateString();
+            })
             ->editColumn('dog_id',function ($model){
                 return "<a href='" . route('dogs.show', $model->dog_id) . "'>{$model->dog->name}</a>";
             })

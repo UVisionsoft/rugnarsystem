@@ -11,6 +11,8 @@ class DogHospitality extends Model
 
     protected $fillable = ['dog_id','from','to'];
 
+    protected $dates = ['from', 'to'];
+
     public function dog()
     {
         return $this->belongsTo(Dog::class);
