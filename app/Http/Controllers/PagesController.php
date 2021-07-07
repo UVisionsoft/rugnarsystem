@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Core\Adapters\Theme;
 use App\DataTables\ActivitySessionsDataTable;
 use App\DataTables\DoctorVisitsDataTable;
+use App\Models\Activity;
 use App\Models\ActivitySession;
 use App\Models\Dog;
+use App\Models\User;
+use App\Models\Vaccine;
 
 class PagesController extends Controller
 {
@@ -20,8 +23,20 @@ class PagesController extends Controller
 
         // Check if the page view file exist
         if (auth()->user()->type == 0) {
+
+            $data = [
+                'users' => User::where('type',2)->get()->count(),
+                'trainers' => User::where('type',1)->get()->count(),
+                'doctors' => User::where('type',3)->get()->count(),
+                'dogs' => Dog::get()->count(),
+                'activities' => Activity::get()->count(),
+                'vaccines' => Vaccine::get()->count(),
+                'hospitalities' => Vaccine::get()->count(),
+            ];
+
+//            return $data;
             if (view()->exists('pages.' . $view)) {
-                return view('pages.' . $view);
+                return view('pages.' . $view,compact('data'));
             }
         } elseif (auth()->user()->type == 2) { // USER
 
