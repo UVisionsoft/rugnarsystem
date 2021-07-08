@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dogs;
 use App\DataTables\VaccinesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DogRequest;
+use App\Models\Activity;
 use App\Models\Dog;
+use App\Models\DogActivity;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,18 +20,6 @@ class ActivitiesController extends Controller
      */
     public function index(Dog $dog)
     {
-        $activities = $dog->activities->groupBy('id')->map(function ($activities){
-            $totalDuration = 0;
-            foreach ($activities as $activity){
-                $totalDuration += (int)$activity['pivot']['duration'];
-            }
-            $activities = $activities[0];
-            $activities['total_duration'] = $totalDuration;
-            return $activities;
-        })->values();
-        unset($dog['activities']);
-        $dog->setAttribute('activities', $activities);
-
         return view('pages.dogs.activities.index', compact('dog'));
     }
 
@@ -38,59 +28,33 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Dog $dog)
     {
+        $activities = Activity::pluck('name', 'id');
+        return view('pages.dogs.activities.create', compact('dog', 'activities'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Dog $dog, Request $request)
     {
+        $this->validate($request,[
+            'activity_id'=>'required',
+            'duration'=>'int|min:1',
+        ]);
+        $request->merge(['dog_id'=> $dog->id]);
+        DogActivity::create($request->all());
+
+        return redirect(route('dogs.activities.index', $dog->id));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function destroy(Dog $dog, DogActivity $activity)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Dog $dog)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Dog $dog)
-    {
+        $activity->delete();
+        return back();
     }
 }

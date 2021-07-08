@@ -9,6 +9,7 @@ class DogActivity extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['dog_id','activity_id','duration'];
     protected $appends = ['remaining_hours'];
 
     public function dog()

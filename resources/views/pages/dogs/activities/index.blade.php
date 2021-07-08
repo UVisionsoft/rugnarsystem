@@ -17,15 +17,17 @@
                 <thead class="thead-dark">
                     <th>اسم التدريب</th>
                     <th>المدة</th>
+                    <th>تاريخ الاضافة</th>
                     <th>خيارات</th>
                 </thead>
                 <tbody>
                     @foreach($dog->activities as $activity)
                     <tr>
                         <td>{{$activity->name}}</td>
-                        <td>{{$activity->total_duration}}</td>
+                        <td>{{$activity->pivot->duration}}</td>
+                        <td>{{$activity->pivot->created_at->toDateString()}}</td>
                         <td>
-                            <form action="{{route('dogs.activities.destroy', [$dog->id, 0])}}" method="POST">
+                            <form action="{{route('dogs.activities.destroy', [$dog->id, $activity->pivot->id])}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-icon btn-sm btn-danger btn-active-light-primary">

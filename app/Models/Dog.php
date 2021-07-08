@@ -23,7 +23,7 @@ class Dog extends Model
 
     public function activities()
     {
-        return $this->belongsToMany(Activity::class, 'dog_activities', 'dog_id', 'activity_id')->withPivot('duration');
+        return $this->belongsToMany(Activity::class, 'dog_activities', 'dog_id', 'activity_id')->withPivot('id','duration','created_at')->orderBy('pivot_created_at', 'DESC');
     }
 
 
