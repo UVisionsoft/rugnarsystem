@@ -22,6 +22,7 @@ class CreateDogsTable extends Migration
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

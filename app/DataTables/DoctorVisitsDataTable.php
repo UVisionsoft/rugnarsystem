@@ -3,16 +3,15 @@
 namespace App\DataTables;
 
 use App\Models\Dog;
-use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException;
+use Jackiedo\LogReader\LogReader;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class DoctorVisitsDataTable extends DataTable
 {
-    protected $userType;
-
     /**
      * Build DataTable class.
      *
@@ -24,41 +23,31 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action', 'type','name'])
-            ->editColumn('type', function ($model) {
-                $styles = [
-                    'مدير' => 'danger',
-                    'مدرب' => 'warning',
-                    'مستخدم' => 'primary',
-                    'طبيب' => 'info',
-                ];
-                $levels = array_keys($styles);
-                $style = 'info';
-                if (isset($styles[$levels[$model->type]])) {
-                    $style = $styles[$levels[$model->type]];
-                }
-                $value = $levels[$model->type];
-
-                return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
+            ->rawColumns(['action', 'owner', 'avatar','name'])
+            ->editColumn('avatar', function ($model) {
+                return '<img src="' . asset($model->avatar) . '" width="50" height="50" class="rounded-circle">';
             })
             ->editColumn('name',function ($model){
-                return "<a href='" . route('accounts.users.show', $model->id) . "'>{$model->name}</a>";
+                return "<a href='" . route('dogs.show', $model->id) . "'>{$model->name}</a>";
+            })
+            ->editColumn('owner', function ($model) {
+                return "<a href='" . route('accounts.users.show', $model->user_id) . "'>{$model->user->name}</a>";
             })
             ->addColumn('action', function ($model) {
-                return view('pages.users._action-menu', compact('model'));
+                return view('pages.dashboard.doctor._action-menu', compact('model'));
             });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param User $model
+     * @param Dog $model
      *
      * @return Collection
      */
-    public function query(User $model)
+    public function query(Dog $model)
     {
-        return $model->where('type', $this->userType);
+        return $model->where('status',1)->with('user')->newQuery();
     }
 
     /**
@@ -69,10 +58,10 @@ class UsersDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('user-table')
+            ->setTableId('doctor-visits-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(0)
+            ->orderBy(3)
             ->responsive()
             ->autoWidth(false)
             ->dom("<f<t>
@@ -89,18 +78,6 @@ class UsersDataTable extends DataTable
 }");
     }
 
-    public function ofType($type)
-    {
-        $types = User::$types;
-        if (!in_array($type, $types))
-            throw new \Exception('unknown user type only supported: ' . implode(',', $types));
-
-        $types = array_flip($types);
-        $this->userType = $types[$type];
-
-        return $this;
-    }
-
     /**
      * Get columns.
      *
@@ -109,15 +86,16 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('#')->width(10),
-            Column::make('name')->title('الاسم')->width(200),
-            Column::make('email')->title('البريد الالكتروني'),
-            Column::computed('type')->title('النوع'),
-            Column::computed('action')->title('خيارات')
+            Column::make('id')->title('#'),
+            Column::make('avatar')->title('صورة الكلب'),
+            Column::make('name')->title('اسم الكلب'),
+            Column::make('age')->title('عمر الكلب'),
+            Column::make('owner')->title('مالك الكلب'),
+            Column::computed('action')->title('الزيارة')
                 ->exportable(false)
                 ->printable(false)
-                ->orderable(false)
-                ->addClass('text-center'),
+                ->addClass('text-center')
+                ->responsivePriority(-1),
         ];
     }
 
@@ -128,6 +106,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'SystemLogs_' . date('YmdHis');
     }
 }

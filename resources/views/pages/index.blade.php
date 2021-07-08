@@ -1,85 +1,101 @@
 <x-base-layout>
 
-   <div class="admin-dash">
+    <div class="container-fluid dash-row">
 
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8">
-            <!--begin::Col-->
-            <div class="col-xxl-4">
-                {{ theme()->getView('partials/widgets/mixed/_widget-2', array('class' => 'card-xxl-stretch', 'chartCcolor' => 'danger', 'chartHeight' => '200px')) }}
-            </div>
-            <!--end::Col-->
+        <div class="row">
 
-            <!--begin::Col-->
-            <div class="col-xxl-4">
-                {{ theme()->getView('partials/widgets/lists/_widget-5', array('class' => 'card-xxl-stretch')) }}
-            </div>
-            <!--end::Col-->
+                   <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-users" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">المستخدمين</h3>
+                           <h5 class="ml-3">{{$data['users']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('accounts.users.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
+                  <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-user-md" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">الاطباء</h3>
+                           <h5 class="ml-3">{{$data['doctors']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('accounts.doctors.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
 
-            <!--begin::Col-->
-            <div class="col-xxl-4">
-                {{ theme()->getView('partials/widgets/mixed/_widget-7', array('class' => 'card-xxl-stretch-50 mb-5 mb-xl-8', 'chartCcolor' => 'primary', 'chartHeight' => '150px')) }}
+                  <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-user-clock" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">المدربين</h3>
+                           <h5 class="ml-3">{{$data['trainers']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('accounts.trainers.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
 
-                {{ theme()->getView('partials/widgets/mixed/_widget-10', array('class' => 'card-xxl-stretch-50 mb-5 mb-xl-8', 'chartCcolor' => 'primary', 'chartHeight' => '175px')) }}
-            </div>
-            <!--end::Col-->
+                  <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-dog" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">الكلاب</h3>
+                           <h5 class="ml-3">{{$data['dogs']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('dogs.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
+
+                  <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-tasks" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">التدريبات</h3>
+                           <h5 class="ml-3">{{$data['activities']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('activities.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
+
+                  <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-syringe" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">التطعيمات</h3>
+                           <h5 class="ml-3">{{$data['vaccines']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('vaccines.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
+
+                  <div class="db-block bg-secondary col-3 m-2">
+                       <div class="db-icon text-center m-2">
+                           <i class="fas fa-hotel" style="font-size: 50px"></i>
+                       </div>
+                       <div class="db-data">
+                           <h3 class="mt-3 ml-3">الاستضافات</h3>
+                           <h5 class="ml-3">{{$data['hospitalities']}}</h5>
+                       </div>
+                           <div class="db-more">
+                               <a href="{{route('hospitalities.index')}}"> لمزيد من المعلومات </a>
+                           </div>
+                   </div>
+
+
         </div>
-        <!--end::Row-->
-
-        <!--begin::Row-->
-        <div class="row gy-5 gx-xl-8">
-            <!--begin::Col-->
-            <div class="col-xxl-4">
-                {{ theme()->getView('partials/widgets/lists/_widget-3', array('class' => 'card-xxl-stretch mb-xl-3')) }}
-            </div>
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <div class="col-xl-8">
-                {{ theme()->getView('partials/widgets/tables/_widget-9', array('class' => 'card-xxl-stretch mb-5 mb-xl-8')) }}
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Row-->
-
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8">
-            <!--begin::Col-->
-            <div class="col-xl-4">
-                {{ theme()->getView('partials/widgets/lists/_widget-2', array('class' => 'card-xl-stretch mb-xl-8')) }}
-            </div>
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <div class="col-xl-4">
-                {{ theme()->getView('partials/widgets/lists/_widget-6', array('class' => 'card-xl-stretch mb-xl-8')) }}
-            </div>
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <div class="col-xl-4">
-                {{ theme()->getView('partials/widgets/lists/_widget-4', array('class' => 'card-xl-stretch mb-5 mb-xl-8', 'items' => '5')) }}
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Row-->
-
-        <!--begin::Row-->
-        <div class="row g-5 gx-xxl-8">
-            <!--begin::Col-->
-            <div class="col-xxl-4">
-                {{ theme()->getView('partials/widgets/mixed/_widget-5', array('class' => 'card-xxl-stretch mb-xl-3', 'chartCcolor' => 'success', 'chartHeight' => '150px')) }}
-            </div>
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <div class="col-xxl-8">
-                {{ theme()->getView('partials/widgets/tables/_widget-5', array('class' => 'card-xxl-stretch mb-5 mb-xxl-8')) }}
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Row-->
-
 
     </div>
 
