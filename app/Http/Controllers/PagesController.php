@@ -8,6 +8,7 @@ use App\DataTables\DoctorVisitsDataTable;
 use App\Models\Activity;
 use App\Models\ActivitySession;
 use App\Models\Dog;
+use App\Models\DogHospitality;
 use App\Models\User;
 use App\Models\Vaccine;
 
@@ -31,7 +32,7 @@ class PagesController extends Controller
                 'dogs' => Dog::get()->count(),
                 'activities' => Activity::get()->count(),
                 'vaccines' => Vaccine::get()->count(),
-                'hospitalities' => Vaccine::get()->count(),
+                'hospitalities' => DogHospitality::get()->count(),
             ];
 
 //            return $data;

@@ -24,7 +24,7 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action', 'type'])
+            ->rawColumns(['action', 'type','name'])
             ->editColumn('type', function ($model) {
                 $styles = [
                     'مدير' => 'danger',
@@ -40,6 +40,9 @@ class UsersDataTable extends DataTable
                 $value = $levels[$model->type];
 
                 return '<div class="badge badge-light-' . $style . ' fw-bolder">' . $value . '</div>';
+            })
+            ->editColumn('name',function ($model){
+                return "<a href='" . route('accounts.users.show', $model->id) . "'>{$model->name}</a>";
             })
             ->addColumn('action', function ($model) {
                 return view('pages.users._action-menu', compact('model'));
