@@ -73,4 +73,5 @@ Route::resource('expenses',\App\Http\Controllers\Expenses\ExpensesController::cl
 
 //Route::get('dog/{id}',[\App\Http\Controllers\Dogs\DogsController::class,'profile'])->name('dogs.profile');
 
+
 require __DIR__.'/auth.php';
