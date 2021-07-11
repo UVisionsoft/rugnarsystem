@@ -27,7 +27,7 @@ class ExpensesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action'])
-            ->addColumn('action', function (Vaccine  $model) {
+            ->addColumn('action', function (Expense  $model) {
                 return view('pages.expenses._action-menu', compact('model'));
             });
     }
