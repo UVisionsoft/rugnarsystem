@@ -46,35 +46,40 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label>الدفع</label>
-                        <select name="salary_type" class="form-control form-control-solid">
-                            <option value="" disabled selected>اختر نوع الدفع</option>
-                            <option value=0 @if(old('salary_type')==0) selected @endif >بالحصة</option>
-                            <option value=1 @if(old('salary_type')==1) selected @endif >بالشهر</option>
-                        </select>
-                        @error('salary_type')
+                    @if(request()->segment(2) == 'trainers' || request()->segment(2) == 'doctors')
+                        <div class="form-group col-md-6">
+                            <label>الدفع</label>
+                            <select name="salary_type" class="form-control form-control-solid">
+                                <option value="" disabled selected>اختر نوع الدفع</option>
+                                <option value=0 @if(old('salary_type')==0) selected @endif >بالحصة</option>
+                                <option value=1 @if(old('salary_type')==1) selected @endif >بالشهر</option>
+                            </select>
+                            @error('salary_type')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>المرتب</label>
+                            <input type="number" name="salary" class="form-control form-control-solid"
+                                   placeholder="المرتب" value="{{old('salary')}}"/>
+                            @error('salary')
                             <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
+                            @enderror
+                        </div>
 
-                    <div class="form-group col-md-6">
-                        <label>المرتب</label>
-                        <input type="number" name="salary" class="form-control form-control-solid"
-                               placeholder="المرتب" value="{{old('salary')}}"/>
-                        @error('salary')
-                        <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
+                    @endif
 
-                    <div class="form-group">
-                        <label>الرصيد</label>
-                        <input type="number" name="credit" class="form-control form-control-solid"
-                               placeholder="الرصيد" value="{{old('credit')}}"/>
-                        @error('credit')
-                        <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
+                    @if(Request::segment(2) == 'users' || Request::segment(2) == 'vendor')
+                        <div class="form-group">
+                            <label>الرصيد</label>
+                            <input type="number" name="credit" class="form-control form-control-solid"
+                                   placeholder="الرصيد" value="{{old('credit')}}"/>
+                            @error('credit')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                    @endif
 
                 </div>
             </div>
