@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedTinyInteger('type')->default(0);
+            $table->string('phone');
+            $table->tinyInteger('salary_type');
+            $table->decimal('salary',10,2);
+            $table->integer('credit');
             $table->rememberToken();
             $table->timestamps();
         });
