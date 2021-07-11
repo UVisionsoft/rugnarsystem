@@ -52,8 +52,8 @@ Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::get('trainers/{trainer}/sessions/create',[ SessionsController::class, 'create'])->name('trainers.sessions.create');
     Route::post('trainers/{trainer}/sessions',[ SessionsController::class, 'store'])->name('trainers.sessions.store');
 
-
     Route::resource('doctors', UsersController::class)->parameters(['doctors' => 'user']);
+    Route::resource('vendors', UsersController::class)->parameters(['vendors' => 'user']);
     Route::resource('admins', UsersController::class)->parameters(['admins' => 'user']);
 });
 

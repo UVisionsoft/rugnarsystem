@@ -32,7 +32,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $types = ['admins'=>'مدير', 'trainers'=>'مدرب', 'users'=>'عميل', 'doctors'=>'طبيب'];
+        $types = ['admins'=>'مدير', 'trainers'=>'مدرب', 'users'=>'عميل', 'doctors'=>'طبيب', 'vendors'=>'مورد'];
         $type = $types[request()->segment(2)];
 
         return view('pages.users.create', compact('type'));
@@ -52,7 +52,7 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
         ]);
-        $types = ['admins', 'trainers', 'users', 'doctors'];
+        $types = ['admins', 'trainers', 'users', 'doctors', 'vendor'];
         $types = array_flip($types);
         $request->merge(['type' => $types[$request->segment(2)]]);
         $user = User::create($request->all());
@@ -82,7 +82,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $types = ['admins'=>'مدير', 'trainers'=>'مدرب', 'users'=>'عميل', 'doctors'=>'طبيب'];
+        $types = ['admins'=>'مدير', 'trainers'=>'مدرب', 'users'=>'عميل', 'doctors'=>'طبيب', 'vendors'=>'مورد'];
         $type = $types[request()->segment(2)];
 
         return view('pages.users.edit', compact('user', 'type'));

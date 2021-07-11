@@ -125,6 +125,19 @@ return array(
                 'title' => 'تسجيل طبيب جديد',
             ],
         ),
+        'vendors' => array(
+            'title' => 'قائمة الموردين',
+            'top_bar' => [
+                'create' => [
+                    'caption' => 'إضافة جديد',
+                    'title' => 'مورد جديد',
+                    'url' => '/accounts/vendors/create',
+                ]
+            ],
+            'create'=>[
+                'title' => 'تسجيل مورد جديد',
+            ],
+        ),
         'trainers' => array(
             'title' => 'قائمة المدربين',
             'top_bar' => [
