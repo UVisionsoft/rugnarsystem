@@ -70,7 +70,7 @@
 
                     @endif
 
-                    @if(Request::segment(2) == 'users' || Request::segment(2) == 'vendor')
+                    @if(Request::segment(2) == 'users' || Request::segment(2) == 'vendors')
                         <div class="form-group">
                             <label>الرصيد</label>
                             <input type="number" name="credit" class="form-control form-control-solid"
