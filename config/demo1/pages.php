@@ -217,6 +217,27 @@ return array(
             ),
         ),
     ),
+
+    'expenses' => array(
+        'title'  => 'النفقات',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'نفقة جديد',
+                'url' => '/expenses/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js'  => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+    ),
     'vaccines' => array(
             'title'  => 'التطعيمات',
             'top_bar' => [

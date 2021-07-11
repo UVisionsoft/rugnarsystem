@@ -67,6 +67,8 @@ Route::resource('dogs.activities',\App\Http\Controllers\Dogs\ActivitiesControlle
 
 Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityController::class);
 
+Route::resource('expenses',\App\Http\Controllers\Expenses\ExpensesController::class);
+
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
 //Route::get('dog/{id}',[\App\Http\Controllers\Dogs\DogsController::class,'profile'])->name('dogs.profile');
