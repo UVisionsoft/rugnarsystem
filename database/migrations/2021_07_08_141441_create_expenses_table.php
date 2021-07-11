@@ -16,7 +16,7 @@ class CreateExpensesTable extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('amount');
+            $table->integer('amount')->default(0);
             $table->text('notes');
             $table->timestamps();
         });

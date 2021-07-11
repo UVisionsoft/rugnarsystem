@@ -71,4 +71,5 @@ Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityCon
 
 //Route::get('dog/{id}',[\App\Http\Controllers\Dogs\DogsController::class,'profile'])->name('dogs.profile');
 
+
 require __DIR__.'/auth.php';
