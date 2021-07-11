@@ -88,11 +88,30 @@ return array(
                             ),
                         ),
                     ),
+                    array(
+                        'title'      => 'الموردين',
+                        'path'       => 'accounts/vendors',
+                        'bullet'     => '<span class="bullet bullet-dot"></span>',
+                        'attributes' => array(
+                            'link' => array(
+                                "title"             => "بيانات الموردرين",
+                                "data-bs-toggle"    => "tooltip",
+                                "data-bs-trigger"   => "hover",
+                                "data-bs-dismiss"   => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
 
-        // dogs
+        // invoices
+        array(
+            'title' => 'الفواتير',
+            'path'  => '/invoices',
+            'icon'  => Theme::getSvgIcon("icons/duotone/cash-register.svg", "svg-icon-2"),
+        ), // dogs
         array(
             'title' => 'الكلاب',
             'path'  => '/dogs',
