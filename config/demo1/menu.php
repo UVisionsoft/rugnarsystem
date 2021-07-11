@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use App\Core\Adapters\Theme;
 
@@ -129,10 +129,18 @@ return array(
             'path'  => '/vaccines',
             'icon'  => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
         ),
+
         // Hospitalities
         array(
             'title' => 'الاستضافات',
             'path'  => '/hospitalities',
+            'icon'  => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
+        ),
+
+        // Expenses
+        array(
+            'title' => 'النفقات',
+            'path'  => '/expenses',
             'icon'  => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
         ),
     ),
