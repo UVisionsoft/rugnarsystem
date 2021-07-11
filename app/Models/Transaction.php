@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+    protected $fillable = ['amount', 'direction', 'notes'];
+
+    public function transactable()
+    {
+        return $this->morphTo();
+    }
 }

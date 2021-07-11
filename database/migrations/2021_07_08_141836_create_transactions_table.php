@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->morphs('transactable');
             $table->integer('amount');
             $table->tinyInteger('direction')->default(1);
-            $table->text('note');
+            $table->text('notes');
             $table->timestamps();
         });
     }
