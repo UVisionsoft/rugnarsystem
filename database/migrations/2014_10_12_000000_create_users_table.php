@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->unsignedTinyInteger('type')->default(0);
             $table->string('phone');
             $table->tinyInteger('salary_type')->default(1);
-            $table->decimal('salary',10,2)->default(0);
+            $table->integer('salary')->default(0);
             $table->integer('credit')->default(0);
             $table->rememberToken();
             $table->timestamps();

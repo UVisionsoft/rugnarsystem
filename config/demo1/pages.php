@@ -105,10 +105,10 @@ return array(
                     'url' => '/accounts/admins/create',
                 ]
             ],
-            'create'=>[
+            'create' => [
                 'title' => 'تسجيل مدير جديد',
             ],
-            'edit'=>[
+            'edit' => [
                 'title' => 'تعديل مدير',
             ]
         ),
@@ -121,7 +121,7 @@ return array(
                     'url' => '/accounts/doctors/create',
                 ]
             ],
-            'create'=>[
+            'create' => [
                 'title' => 'تسجيل طبيب جديد',
             ],
         ),
@@ -134,7 +134,7 @@ return array(
                     'url' => '/accounts/vendors/create',
                 ]
             ],
-            'create'=>[
+            'create' => [
                 'title' => 'تسجيل مورد جديد',
             ],
         ),
@@ -147,10 +147,10 @@ return array(
                     'url' => '/accounts/trainers/create',
                 ]
             ],
-            'create'=>[
+            'create' => [
                 'title' => 'تسجيل مدرب جديد',
             ],
-            '*.sessions'=>[
+            '*.sessions' => [
                 'title' => 'قائمة المدربين',
                 'top_bar' => [
                     'create' => [
@@ -170,14 +170,14 @@ return array(
                     'url' => '/accounts/users/create',
                 ]
             ],
-            'create'=>[
+            'create' => [
                 'title' => 'تسجيل عميل جديد',
             ]
         ),
     ),
 
     'dogs' => array(
-        'title'  => 'الكــــلاب',
+        'title' => 'الكــــلاب',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
@@ -190,7 +190,7 @@ return array(
                 'css' => array(
                     'plugins/custom/datatables/datatables.bundle.css',
                 ),
-                'js'  => array(
+                'js' => array(
                     'plugins/custom/datatables/datatables.bundle.js',
                 ),
             ),
@@ -198,7 +198,7 @@ return array(
     ),
 
     'activities' => array(
-        'title'  => 'التدريبات',
+        'title' => 'التدريبات',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
@@ -211,7 +211,7 @@ return array(
                 'css' => array(
                     'plugins/custom/datatables/datatables.bundle.css',
                 ),
-                'js'  => array(
+                'js' => array(
                     'plugins/custom/datatables/datatables.bundle.js',
                 ),
             ),
@@ -219,7 +219,7 @@ return array(
     ),
 
     'expenses' => array(
-        'title'  => 'النفقات',
+        'title' => 'النفقات',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
@@ -232,34 +232,34 @@ return array(
                 'css' => array(
                     'plugins/custom/datatables/datatables.bundle.css',
                 ),
-                'js'  => array(
+                'js' => array(
                     'plugins/custom/datatables/datatables.bundle.js',
                 ),
             ),
         ),
     ),
     'vaccines' => array(
-            'title'  => 'التطعيمات',
-            'top_bar' => [
-                'create' => [
-                    'caption' => 'إضافة جديد',
-                    'title' => 'تطعيم جديد',
-                    'url' => '/vaccines/create',
-                ]
-            ],
-            'assets' => array(
-                'custom' => array(
-                    'css' => array(
-                        'plugins/custom/datatables/datatables.bundle.css',
-                    ),
-                    'js'  => array(
-                        'plugins/custom/datatables/datatables.bundle.js',
-                    ),
+        'title' => 'التطعيمات',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'تطعيم جديد',
+                'url' => '/vaccines/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js' => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
                 ),
             ),
         ),
+    ),
     'hospitalities' => array(
-        'title'  => 'الاستضافات',
+        'title' => 'الاستضافات',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
@@ -272,7 +272,7 @@ return array(
                 'css' => array(
                     'plugins/custom/datatables/datatables.bundle.css',
                 ),
-                'js'  => array(
+                'js' => array(
                     'plugins/custom/datatables/datatables.bundle.js',
                 ),
             ),

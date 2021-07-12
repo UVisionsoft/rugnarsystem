@@ -69,6 +69,10 @@ Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityCon
 
 Route::resource('expenses',\App\Http\Controllers\Expenses\ExpensesController::class);
 
+Route::prefix('settings')->name('settings.')->group(function () {
+    Route::resource('accounts',\App\Http\Controllers\Settings\AppSettingsController::class);
+});
+
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
 //Route::get('dog/{id}',[\App\Http\Controllers\Dogs\DogsController::class,'profile'])->name('dogs.profile');
