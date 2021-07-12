@@ -31,7 +31,7 @@ class UsersDataTable extends DataTable
                     'مدرب' => 'warning',
                     'مستخدم' => 'primary',
                     'طبيب' => 'info',
-                    'مورد' => 'vendor',
+                    'مورد' => 'success',
                 ];
                 $levels = array_keys($styles);
                 $style = 'info';

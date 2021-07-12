@@ -52,7 +52,7 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
         ]);
-        $types = ['admins', 'trainers', 'users', 'doctors', 'vendor'];
+        $types = ['admins', 'trainers', 'users', 'doctors', 'vendors'];
         $types = array_flip($types);
         $request->merge(['type' => $types[$request->segment(2)]]);
         $user = User::create($request->all());
