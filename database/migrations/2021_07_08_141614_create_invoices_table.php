@@ -15,11 +15,22 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+
             $table->foreignIdFor(\App\Models\User::class);
+
+            /*
+             * Type Column
+             * 0 => Sales
+             * 1 => Purchases
+             * */
             $table->tinyInteger('type')->default(0);
+
             $table->integer('discount')->default(0);
+
             $table->integer('tax')->default(0);
+
             $table->integer('total_amount')->default(0);
+
             $table->timestamps();
         });
     }

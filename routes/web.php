@@ -47,34 +47,41 @@ Route::prefix('accounts')->name('accounts.')->group(function () {
     Route::resource('users', UsersController::class);
 
     Route::resource('trainers', UsersController::class)->parameters(['trainers' => 'user']);
-    Route::get('trainers/{trainer}/sessions',[ SessionsController::class, 'index'])->name('trainers.sessions.index');
-    Route::patch('trainers/{trainer}/sessions',[ SessionsController::class, 'update'])->name('trainers.sessions.update');
-    Route::get('trainers/{trainer}/sessions/create',[ SessionsController::class, 'create'])->name('trainers.sessions.create');
-    Route::post('trainers/{trainer}/sessions',[ SessionsController::class, 'store'])->name('trainers.sessions.store');
+    Route::get('trainers/{trainer}/sessions', [SessionsController::class, 'index'])->name('trainers.sessions.index');
+    Route::patch('trainers/{trainer}/sessions', [SessionsController::class, 'update'])->name('trainers.sessions.update');
+    Route::get('trainers/{trainer}/sessions/create', [SessionsController::class, 'create'])->name('trainers.sessions.create');
+    Route::post('trainers/{trainer}/sessions', [SessionsController::class, 'store'])->name('trainers.sessions.store');
 
     Route::resource('doctors', UsersController::class)->parameters(['doctors' => 'user']);
     Route::resource('vendors', UsersController::class)->parameters(['vendors' => 'user']);
     Route::resource('admins', UsersController::class)->parameters(['admins' => 'user']);
 });
 
-Route::resource('activities',\App\Http\Controllers\Activities\ActivitiesController::class);
+Route::prefix('invoices')->name('invoices.')->group(function () {
+    Route::resource('sales', \App\Http\Controllers\Settings\AppSettingsController::class);
+    Route::resource('return_sales', \App\Http\Controllers\Settings\AppSettingsController::class);
+    Route::resource('purchases', \App\Http\Controllers\Settings\AppSettingsController::class);
+    Route::resource('return_purchases', \App\Http\Controllers\Settings\AppSettingsController::class);
+});
 
-Route::resource('vaccines',\App\Http\Controllers\Vaccines\VaccinesController::class);
+Route::resource('activities', \App\Http\Controllers\Activities\ActivitiesController::class);
 
-Route::resource('dogs',\App\Http\Controllers\Dogs\DogsController::class);
-Route::resource('dogs.vaccines',\App\Http\Controllers\Dogs\VaccinesController::class);
-Route::resource('dogs.activities',\App\Http\Controllers\Dogs\ActivitiesController::class);
+Route::resource('vaccines', \App\Http\Controllers\Vaccines\VaccinesController::class);
 
-Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityController::class);
+Route::resource('dogs', \App\Http\Controllers\Dogs\DogsController::class);
+Route::resource('dogs.vaccines', \App\Http\Controllers\Dogs\VaccinesController::class);
+Route::resource('dogs.activities', \App\Http\Controllers\Dogs\ActivitiesController::class);
 
-Route::resource('expenses',\App\Http\Controllers\Expenses\ExpensesController::class);
+Route::resource('hospitalities', \App\Http\Controllers\Hospitality\HospitalityController::class);
 
-Route::resource('services',\App\Http\Controllers\Services\ServicesController::class);
+Route::resource('expenses', \App\Http\Controllers\Expenses\ExpensesController::class);
+
+Route::resource('services', \App\Http\Controllers\Services\ServicesController::class);
 
 Route::resource('factions',\App\Http\Controllers\Factions\FactionsController::class);
 
 Route::prefix('settings')->name('settings.')->group(function () {
-    Route::resource('accounts',\App\Http\Controllers\Settings\AppSettingsController::class);
+    Route::resource('accounts', \App\Http\Controllers\Settings\AppSettingsController::class);
 });
 
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
@@ -82,4 +89,4 @@ Route::prefix('settings')->name('settings.')->group(function () {
 //Route::get('dog/{id}',[\App\Http\Controllers\Dogs\DogsController::class,'profile'])->name('dogs.profile');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -15,8 +15,13 @@ class CreateInvoiceDetailsTable extends Migration
     {
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Dog::class);
             $table->foreignIdFor(\App\Models\Invoice::class);
+            $table->foreignIdFor(\App\Models\Dog::class);
+            /*
+             * if (service id => null) then it's a sales item
+             * else it's a service only item
+             * */
+            $table->foreignIdFor(\App\Models\Service::class)->nullable()->default(null);
             $table->integer('amount');
             $table->timestamps();
         });
