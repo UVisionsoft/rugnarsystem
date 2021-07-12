@@ -343,4 +343,24 @@ return array(
             ),
         ),
     ),
+    'salaries' => array(
+        'title' => 'الرواتب',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'تسجيل الرواتب',
+                'title' => 'تسجيل الرواتب',
+                'url' => '/salaries/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js' => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+    ),
 );

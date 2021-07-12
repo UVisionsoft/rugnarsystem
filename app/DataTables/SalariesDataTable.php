@@ -100,6 +100,6 @@ class SalariesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Expenses_'.date('YmdHis');
+        return 'Salaries_'.date('YmdHis');
     }
 }

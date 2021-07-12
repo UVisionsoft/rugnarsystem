@@ -1,5 +1,4 @@
 <x-base-layout>
-    @section('page-title', 'رواتب الموظفين')
     <!--begin::Card-->
     <div class="card">
         <!--begin::Card body-->

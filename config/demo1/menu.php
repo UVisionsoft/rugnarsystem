@@ -220,6 +220,12 @@ return array(
             'path' => '/services',
             'icon' => Theme::getSvgIcon("icons/duotone/service.svg", "svg-icon-2"),
         ),
+        // Services
+        array(
+            'title' => 'الرواتب',
+            'path' => '/salaries',
+            'icon' => Theme::getSvgIcon("icons/duotone/bill-wave.svg", "svg-icon-2"),
+        ),
         // Seetings
         array(
             'title' => 'الاعدادات',

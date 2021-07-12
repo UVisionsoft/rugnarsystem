@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{asset('plugins/custom/datatables/datatables.bundle.css')}}">
-
 <!--begin::Table-->
 {{ $dataTable->table() }}
 <!--end::Table-->
@@ -8,26 +6,22 @@
 @section('scripts')
     {{ $dataTable->scripts() }}
 
-    <script src="{{asset('plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <script type="text/javascript">
         $(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                }
-            });
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
-            LaravelDataTables['salaries-table'].on('click', '[data-change-status]', function (e) {
+            LaravelDataTables['salaries-table'].on('click', '[data-destroy]', function (e) {
                 e.preventDefault();
+                if (!confirm("{{ __('Are you sure to delete this record?') }}")) {
+                    return;
+                }
 
                 $.ajax({
-                    url: $(this).data('change-status'),
-                    type: 'PATCH',
+                    url: $(this).data('destroy'),
+                    type: 'DELETE',
+                    dataType: 'JSON',
                     data: {
-                        "_method": "PATCH",
-                        "activity_id" : $(this).data("activity-id"),
-                        "trainer_id" : $(this).data("trainer-id"),
-                        "status" : $(this).data("status")
+                        '_method': 'DELETE',
                     },
                     complete: function () {
                         LaravelDataTables['salaries-table'].ajax.reload();
