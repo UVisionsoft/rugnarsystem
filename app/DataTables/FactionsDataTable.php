@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Activity;
-use App\Models\Expense;
+use App\Models\Faction;
 use App\Models\Vaccine;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -13,7 +13,7 @@ use Jackiedo\LogReader\LogReader;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class ExpensesDataTable extends DataTable
+class FactionsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -27,19 +27,19 @@ class ExpensesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action'])
-            ->addColumn('action', function (Expense  $model) {
-                return view('pages.expenses._action-menu', compact('model'));
+            ->addColumn('action', function (Faction  $model) {
+                return view('pages.factions._action-menu', compact('model'));
             });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param Expense $model
+     * @param Faction $model
      *
      * @return Builder
      */
-    public function query(Expense $model)
+    public function query(Faction $model)
     {
         return $model->newQuery();
     }
@@ -52,7 +52,7 @@ class ExpensesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('expenses-table')
+            ->setTableId('factions-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(0)
@@ -81,8 +81,7 @@ class ExpensesDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#'),
-            Column::make('name')->title('الاسم'),
-            Column::make('amount')->title('التكلفة'),
+            Column::make('name')->title('اسم الفصيلة'),
             Column::make('action')->title('خيارات'),
         ];
     }
@@ -94,6 +93,6 @@ class ExpensesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Expenses_'.date('YmdHis');
+        return 'Factions_' . date('YmdHis');
     }
 }

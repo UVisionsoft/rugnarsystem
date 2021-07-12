@@ -71,6 +71,8 @@ Route::resource('expenses',\App\Http\Controllers\Expenses\ExpensesController::cl
 
 Route::resource('services',\App\Http\Controllers\Services\ServicesController::class);
 
+Route::resource('factions',\App\Http\Controllers\Factions\FactionsController::class);
+
 Route::prefix('settings')->name('settings.')->group(function () {
     Route::resource('accounts',\App\Http\Controllers\Settings\AppSettingsController::class);
 });

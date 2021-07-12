@@ -111,7 +111,14 @@ return array(
             'title' => 'الفواتير',
             'path' => '/invoices',
             'icon' => Theme::getSvgIcon("icons/duotone/cash-register.svg", "svg-icon-2"),
-        ), // dogs
+        ),
+        // Factions
+        array(
+            'title' => 'الفصائل',
+            'path' => '/factions',
+            'icon' => Theme::getSvgIcon("icons/duotone/factions.svg", "svg-icon-2"),
+        ),
+        // dogs
         array(
             'title' => 'الكلاب',
             'path' => '/dogs',
