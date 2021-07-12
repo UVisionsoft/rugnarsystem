@@ -200,7 +200,7 @@ return array(
         array(
             'title' => 'الاستضافات',
             'path' => '/hospitalities',
-            'icon' => Theme::getSvgIcon("icons/duotone/syringe.svg", "svg-icon-2"),
+            'icon' => Theme::getSvgIcon("icons/duotone/hostel.svg", "svg-icon-2"),
         ),
 
         // Expenses
@@ -208,6 +208,12 @@ return array(
             'title' => 'النفقات',
             'path' => '/expenses',
             'icon' => Theme::getSvgIcon("icons/duotone/bill-wave.svg", "svg-icon-2"),
+        ),
+        // Services
+        array(
+            'title' => 'الخدمات',
+            'path' => '/services',
+            'icon' => Theme::getSvgIcon("icons/duotone/service.svg", "svg-icon-2"),
         ),
         // Seetings
         array(

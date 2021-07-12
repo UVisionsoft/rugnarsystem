@@ -73,7 +73,7 @@ class UsersDataTable extends DataTable
             ->setTableId('user-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(0)
+            ->orderBy(0,'asc')
             ->responsive()
             ->autoWidth(false)
             ->dom("<f<t>

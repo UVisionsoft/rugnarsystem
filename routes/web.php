@@ -69,6 +69,8 @@ Route::resource('hospitalities',\App\Http\Controllers\Hospitality\HospitalityCon
 
 Route::resource('expenses',\App\Http\Controllers\Expenses\ExpensesController::class);
 
+Route::resource('services',\App\Http\Controllers\Services\ServicesController::class);
+
 Route::prefix('settings')->name('settings.')->group(function () {
     Route::resource('accounts',\App\Http\Controllers\Settings\AppSettingsController::class);
 });

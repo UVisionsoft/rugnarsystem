@@ -238,6 +238,26 @@ return array(
             ),
         ),
     ),
+    'services' => array(
+        'title' => 'الخدمات',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'خدمة جديدة',
+                'url' => '/services/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js' => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+    ),
     'vaccines' => array(
         'title' => 'التطعيمات',
         'top_bar' => [
