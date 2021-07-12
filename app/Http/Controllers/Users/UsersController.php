@@ -55,6 +55,7 @@ class UsersController extends Controller
         $types = ['admins', 'trainers', 'users', 'doctors', 'vendors'];
         $types = array_flip($types);
         $request->merge(['type' => $types[$request->segment(2)]]);
+        $request["password"] = bcrypt($request["password"]);
         $user = User::create($request->all());
 
         return redirect('accounts/' . $request->segment(2));
