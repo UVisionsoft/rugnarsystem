@@ -15,7 +15,7 @@ class CreateDogHistoriesTable extends Migration
     {
         Schema::create('dog_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Dog::class)->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Dog::class)->constrained()->cascadeOnDelete();
             $table->string('action')->index();
             $table->json('payload')->nullable()->default(null);
             $table->timestamps();

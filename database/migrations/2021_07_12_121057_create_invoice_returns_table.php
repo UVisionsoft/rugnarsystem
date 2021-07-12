@@ -15,7 +15,7 @@ class CreateInvoiceReturnsTable extends Migration
     {
         Schema::create('invoice_returns', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Invoice::class)->restrictOnDelete();
+            $table->foreignIdFor(\App\Models\Invoice::class)->constrained()->restrictOnDelete();
             $table->integer('deduction')->default(0);
             $table->timestamps();
         });

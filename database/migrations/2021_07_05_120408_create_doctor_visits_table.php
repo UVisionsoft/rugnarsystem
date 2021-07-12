@@ -15,8 +15,8 @@ class CreateDoctorVisitsTable extends Migration
     {
         Schema::create('doctor_visits', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class)->restrictOnDelete();
-            $table->foreignIdFor(\App\Models\Dog::class)->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->restrictOnDelete();
+            $table->foreignIdFor(\App\Models\Dog::class)->constrained()->cascadeOnDelete();
             $table->timestamp('visited_at');
             $table->text('notes');
         });

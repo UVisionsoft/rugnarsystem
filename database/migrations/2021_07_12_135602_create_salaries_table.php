@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoicesTable extends Migration
+class CreateSalariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,13 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-
+            $table->date('from');
+            $table->date('to');
             $table->foreignIdFor(\App\Models\User::class)->constrained()->restrictOnDelete();
-
-            /*
-             * Type Column
-             * 0 => Sales
-             * 1 => Purchases
-             * */
-            $table->tinyInteger('type')->default(0);
-
-            $table->integer('discount')->default(0);
-
-            $table->integer('tax')->default(0);
-
-            $table->integer('total_amount')->default(0);
-
+            $table->integer('amount')->default(0);
+            $table->text('notes');
             $table->timestamps();
         });
     }
@@ -42,6 +31,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('salaries');
     }
 }

@@ -80,9 +80,13 @@ Route::resource('services', \App\Http\Controllers\Services\ServicesController::c
 
 Route::resource('factions',\App\Http\Controllers\Factions\FactionsController::class);
 
+Route::resource('salaries',\App\Http\Controllers\Salaries\SalariesController::class);
+
 Route::prefix('settings')->name('settings.')->group(function () {
     Route::resource('accounts', \App\Http\Controllers\Settings\AppSettingsController::class);
 });
+
+
 
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
