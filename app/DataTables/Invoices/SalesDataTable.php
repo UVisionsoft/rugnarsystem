@@ -4,7 +4,7 @@
 namespace App\DataTables\Invoices;
 
 
-use App\Models\Dog;
+use App\Models\Invoice;
 use Illuminate\Support\Collection;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -22,31 +22,22 @@ class SalesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->rawColumns(['action', 'owner', 'avatar','name'])
-            ->editColumn('avatar', function ($model) {
-                return '<img src="' . asset($model->avatar) . '" width="50" height="50" class="rounded-circle">';
-            })
-            ->editColumn('name',function ($model){
-                return "<a href='" . route('dogs.show', $model->id) . "'>{$model->name}</a>";
-            })
-            ->editColumn('owner', function ($model) {
-                return "<a href='" . route('accounts.users.show', $model->user_id) . "'>{$model->user->name}</a>";
-            })
-            ->addColumn('action', function ($model) {
-                return view('pages.dogs._action-menu', compact('model'));
+            ->rawColumns(['action'])
+            ->addColumn('action', function (Invoice $model) {
+                return view('pages.invoices.sales._action-menu', compact('model'));
             });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param Dog $model
+     * @param Invoice $model
      *
      * @return Collection
      */
-    public function query(Dog $model)
+    public function query(Invoice $model)
     {
-        return $model->with('user')->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -57,7 +48,7 @@ class SalesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('dogs-table')
+            ->setTableId('invoices-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(3)
@@ -86,10 +77,10 @@ class SalesDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#'),
-            Column::make('avatar')->title('صورة الكلب'),
-            Column::make('name')->title('اسم الكلب'),
-            Column::make('age')->title('عمر الكلب'),
-            Column::make('owner')->title('مالك الكلب'),
+            Column::make('user_id')->title('اسم العميل'),
+            Column::make('total_amount')->title('الاجمالي'),
+            Column::make('discount')->title('الخصم'),
+            Column::make('tax')->title('قيمة الضريبة'),
             Column::computed('action')->title('خيارات')
                 ->exportable(false)
                 ->printable(false)
@@ -105,6 +96,6 @@ class SalesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'SystemLogs_' . date('YmdHis');
+        return 'Invoices_' . date('YmdHis');
     }
 }

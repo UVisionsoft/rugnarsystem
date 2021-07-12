@@ -260,6 +260,29 @@ return array(
         ),
     ),
 
+ 'invoices' => array(
+        'sales'=>[
+        'title' => 'الفواتير',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'فاتورة جديدة',
+                'url' => '/invoices/sales/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js' => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+            ]
+    ),
+
     'factions' => array(
         'title' => 'الفصائل',
         'top_bar' => [
