@@ -20,8 +20,9 @@ class CreateDogsTable extends Migration
             $table->integer('age');
             $table->string('registration_num')->default('');
             $table->text('notes')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreignIdFor(\App\Models\User::class)->restrictOnDelete();
+            $table->foreignIdFor(\App\Models\Faction::class)->restrictOnDelete();
             /*
              * owned By
              * 0 => Farm

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDogHistoriesTable extends Migration
+class CreateInvoiceReturnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDogHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dog_histories', function (Blueprint $table) {
+        Schema::create('invoice_returns', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Dog::class)->cascadeOnDelete();
-            $table->string('action')->index();
-            $table->json('payload')->nullable()->default(null);
+            $table->foreignIdFor(\App\Models\Invoice::class)->restrictOnDelete();
+            $table->integer('deduction')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateDogHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dog_histories');
+        Schema::dropIfExists('invoice_returns');
     }
 }
