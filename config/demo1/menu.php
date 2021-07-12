@@ -105,13 +105,79 @@ return array(
                 ),
             ),
         ),
-
-        // invoices
+        // Invoices
         array(
             'title' => 'الفواتير',
-            'path' => '/invoices',
-            'icon' => Theme::getSvgIcon("icons/duotone/cash-register.svg", "svg-icon-2"),
-        ), // dogs
+            'icon' => array(
+                'svg' => Theme::getSvgIcon("icons/duotone/cash-register.svg", "svg-icon-2"),
+                'font' => '<i class="bi bi-person fs-2"></i>',
+            ),
+            'classes' => array('item' => 'menu-accordion'),
+            'attributes' => array(
+                "data-kt-menu-trigger" => "click",
+            ),
+            'sub' => array(
+                'class' => 'menu-sub-accordion menu-active-bg',
+                'items' => array(
+                    array(
+                        'title' => 'فواتير البيع',
+                        'path' => 'invoices/sales',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'attributes' => array(
+                            'link' => array(
+                                "title" => "فواتير البيع",
+                                "data-bs-toggle" => "tooltip",
+                                "data-bs-trigger" => "hover",
+                                "data-bs-dismiss" => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
+                        'title' => 'مرتجعات فواتير البيع',
+                        'path' => 'invoices/return_sales',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'attributes' => array(
+                            'link' => array(
+                                "title" => "مرتجعات فواتير البيع",
+                                "data-bs-toggle" => "tooltip",
+                                "data-bs-trigger" => "hover",
+                                "data-bs-dismiss" => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
+                        'title' => 'فواتير المشتريات',
+                        'path' => 'invoices/purchases',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'attributes' => array(
+                            'link' => array(
+                                "title" => "فواتير المشتريات",
+                                "data-bs-toggle" => "tooltip",
+                                "data-bs-trigger" => "hover",
+                                "data-bs-dismiss" => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                    array(
+                        'title' => 'مرتجعات فواتير المشتريات',
+                        'path' => 'invoices/return_purchases',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                        'attributes' => array(
+                            'link' => array(
+                                "title" => "مرتجعات فواتير المشتريات",
+                                "data-bs-toggle" => "tooltip",
+                                "data-bs-trigger" => "hover",
+                                "data-bs-dismiss" => "click",
+                                "data-bs-placement" => "right",
+                            ),
+                        ),
+                    ),
+                )
+            ),
+        ),
         array(
             'title' => 'الكلاب',
             'path' => '/dogs',

@@ -22,7 +22,22 @@ class CreateDogsTable extends Migration
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            /*
+             * owned By
+             * 0 => Farm
+             * 1 => Farm and Born at farm
+             * 2 => customer
+             * */
+            $table->tinyInteger('owned_by')->default(0);
+
+            /*
+             * Status
+             * 0 => died
+             * 1 => alive
+             * 2 => sold
+             * */
             $table->tinyInteger('status')->default(1);
+
             $table->timestamps();
         });
     }
