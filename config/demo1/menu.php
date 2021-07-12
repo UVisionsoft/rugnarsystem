@@ -143,6 +143,12 @@ return array(
             'path' => '/expenses',
             'icon' => Theme::getSvgIcon("icons/duotone/bill-wave.svg", "svg-icon-2"),
         ),
+        // Services
+        array(
+            'title' => 'الخدمات',
+            'path' => '/services',
+            'icon' => Theme::getSvgIcon("icons/duotone/bill-wave.svg", "svg-icon-2"),
+        ),
         // Seetings
         array(
             'title' => 'الاعدادات',
