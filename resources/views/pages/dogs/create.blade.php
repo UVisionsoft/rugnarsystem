@@ -68,6 +68,35 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group col-md-6">
+                                <label>ملكية الكلب</label>
+                                <select name="owned_by" class="form-control form-control-solid">
+                                    <option disabled selected> اختر ملكية الكلب </option>
+                                    <option value=0 > كلب المزرعة </option>
+                                    <option value=1 > مولود بالمزرعة </option>
+                                    <option value=2 > ملك لعميل </option>
+                                </select>
+                                @error('owned_by')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label>حالة الكلب</label>
+                                <select name="status" class="form-control form-control-solid">
+                                    <option disabled selected> اختر حالة الكلب </option>
+                                    <option value=0 > ميت </option>
+                                    <option value=1 > حي </option>
+                                    <option value=2 > مباع </option>
+                                </select>
+                                @error('status')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+
+
+
                             <div class="form-control-solid">
                                 <label>ملاحظات</label>
                                 <textarea name="notes" class="form-control form-control-solid" cols="30"

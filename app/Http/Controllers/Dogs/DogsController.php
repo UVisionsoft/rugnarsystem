@@ -38,7 +38,6 @@ class DogsController extends Controller
         $factions = Faction::all();
         $owners = User::where('type', 2)->get();
         $vaccines = Vaccine::pluck('name', 'id');
-
         return view('pages.dogs.create', compact('owners', 'vaccines','factions'));
     }
 
