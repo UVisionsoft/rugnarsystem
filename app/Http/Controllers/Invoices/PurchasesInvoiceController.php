@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Invoices;
 
 use App\DataTables\Invoices\PurchasesDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Faction;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PurchasesInvoiceController extends Controller
@@ -25,7 +27,10 @@ class PurchasesInvoiceController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers = User::where('type', 4)->get();
+        $factions = Faction::get();
+
+        return view('pages.invoices.purchases.create', compact('suppliers', 'factions'));
     }
 
     /**
