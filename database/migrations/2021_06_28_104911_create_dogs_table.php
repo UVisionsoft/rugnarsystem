@@ -38,8 +38,10 @@ class CreateDogsTable extends Migration
              * 2 => sold
              * */
             $table->tinyInteger('status')->default(1);
-
+            $table->boolean('is_active')->default(1);
+            $table->enum('gender',['male','female']);
             $table->timestamps();
+
         });
     }
 
