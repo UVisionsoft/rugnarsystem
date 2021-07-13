@@ -69,13 +69,12 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label>ملكية الكلب</label>
-                                <select name="owned_by" class="form-control form-control-solid">
-                                    <option disabled selected> اختر ملكية الكلب </option>
-                                    <option value=0 > كلب المزرعة </option>
-                                    <option value=1 > مولود بالمزرعة </option>
-                                    <option value=2 > ملك لعميل </option>
-                                </select>
+                                    <label>ملكية الكلب</label>
+                                <div class="form-control form-control-solid">
+                                    <input type="radio" name="owned_by" value=1>  مولود بالمزرعة
+                                    <br>
+                                    <input type="radio" name="owned_by" value=2> ملك لعميل
+                                </div>
                                 @error('owned_by')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
@@ -84,18 +83,10 @@
 
                             <div class="form-group col-md-6">
                                 <label>حالة الكلب</label>
-                                <select name="status" class="form-control form-control-solid">
-                                    <option disabled selected> اختر حالة الكلب </option>
-                                    <option value=0 > ميت </option>
-                                    <option value=1 > حي </option>
-                                    <option value=2 > مباع </option>
-                                </select>
-                                @error('status')
-                                <small class="text-danger">{{$message}}</small>
-                                @enderror
+                                <div class="form-control form-control-solid">
+                                    <input type="checkbox" name="status" value=0 > ميت
+                                </div>
                             </div>
-
-
 
                             <div class="form-control-solid">
                                 <label>ملاحظات</label>

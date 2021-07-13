@@ -82,28 +82,28 @@
 
                             <div class="form-group col-md-6">
                                 <label>ملكية الكلب</label>
-                                <select name="owned_by" class="form-control form-control-solid">
-                                    <option disabled selected> اختر ملكية الكلب </option>
-                                    <option value=0 @if($dog->owned_by == 0) selected @endif > كلب المزرعة </option>
-                                    <option value=1 @if($dog->owned_by == 1) selected @endif > مولود بالمزرعة </option>
-                                    <option value=2 @if($dog->owned_by == 2) selected @endif > ملك لعميل </option>
-                                </select>
+                                <div class="form-control form-control-solid">
+                                    <input type="radio" name="owned_by" value=1
+                                        @if($dog->owned_by == 1) checked @endif
+                                    >  مولود بالمزرعة
+                                    <br>
+                                    <input type="radio" name="owned_by" value=2
+                                        @if($dog->owned_by == 2) checked @endif
+                                    > ملك لعميل
+                                </div>
                                 @error('owned_by')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
 
+
                             <div class="form-group col-md-6">
                                 <label>حالة الكلب</label>
-                                <select name="status" class="form-control form-control-solid">
-                                    <option disabled selected> اختر حالة الكلب </option>
-                                    <option value=0 @if($dog->status == 0) selected @endif > ميت </option>
-                                    <option value=1 @if($dog->status == 1) selected @endif > حي </option>
-                                    <option value=2 @if($dog->status == 2) selected @endif> مباع </option>
-                                </select>
-                                @error('status')
-                                <small class="text-danger">{{$message}}</small>
-                                @enderror
+                                <div class="form-control form-control-solid">
+                                    <input type="checkbox" name="status" value=0
+                                    @if($dog->status == 0) checked @endif
+                                    > ميت
+                                </div>
                             </div>
 
                             <div class="form-control-solid">
