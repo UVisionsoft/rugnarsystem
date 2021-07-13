@@ -15,29 +15,33 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label class="label-control">الفترة من</label>
-                                <input type="text" class="form-control form-control-solid disabled" disabled readonly value="{{now()->startOfMonth()->toDateString()}}">
+                                <input type="text" class="form-control form-control-solid disabled" disabled readonly
+                                       value="{{now()->startOfMonth()->toDateString()}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="label-control">الفترة الي</label>
-                                <input type="text" class="form-control form-control-solid disabled" disabled readonly value="{{now()->endOfMonth()->toDateString()}}">
+                                <input type="text" class="form-control form-control-solid disabled" disabled readonly
+                                       value="{{now()->endOfMonth()->toDateString()}}">
                             </div>
 
 
                             <div class="form-group col-md-6">
                                 <label class="label-control">الموظف</label>
                                 <select name="user_id" class="form-control form-control-solid">
-                                    @foreach($empolyees as $id => $empolyee)
-                                        <option value="{{$id}}">{{$empolyee}}</option>
+                                    @foreach($empolyees as $empolyee)
+                                        <option  data-salary="0"> من فضلك اختر الموظف </option>
+                                        <option data-salary="{{$empolyee->salary}}"
+                                                value="{{$empolyee->id}}">{{$empolyee->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('user_id')
-                                    <small class="text-danger">{{$message}}</small>
+                                <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label class="label-control">قيمة الراتب</label>
-                                <input type="number" name="amount" class="form-control form-control-solid" value="0" >
+                                <input type="number" name="amount" class="form-control form-control-solid" value="0">
                             </div>
 
                         </div>
@@ -58,14 +62,10 @@
 
     @section('scripts')
         <script>
-            $('input[type="checkbox"]').on('change', function ($e){
-                if(this.checked) {
-                    $(this).parent().parent().find('select').attr('disabled', false);
-                }else{
-                    $(this).parent().parent().find('select').attr('disabled', true);
-                }
-
-            })
+            $('select[name="user_id"]').on('change', function () {
+                let salary = $(this).find(':selected').data('salary')
+                $('input[name="amount"]').val(salary)
+            });
         </script>
     @endsection
 

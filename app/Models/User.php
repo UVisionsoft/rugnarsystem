@@ -56,4 +56,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ActivitySessions()
+    {
+        return $this->hasMany(ActivitySession::class,'trainer_id');
+    }
 }
