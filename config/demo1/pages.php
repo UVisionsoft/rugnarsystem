@@ -281,13 +281,35 @@ return array(
             ),
         ),
             ],
+
+        'return_sales'=>[
+        'title' => 'الفواتير',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'فاتورة جديدة',
+                'url' => '/invoices/return_sales/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js' => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+            ],
+
         'purchases'=>[
         'title' => 'الفواتير',
         'top_bar' => [
             'create' => [
                 'caption' => 'إضافة جديد',
                 'title' => 'فاتورة جديدة',
-                'url' => '/invoices/sales/create',
+                'url' => '/invoices/purchases/create',
             ]
         ],
         'assets' => array(
