@@ -81,12 +81,12 @@
 
 
                             <div class="form-group col-md-6">
-                                <label>ملكية الكلب</label>
+                                <label></label>
                                 <div class="form-control form-control-solid">
                                     <input type="radio" name="owned_by" value=1
                                         @if($dog->owned_by == 1) checked @endif
                                     >  مولود بالمزرعة
-                                    <br>
+                                    &ensp;
                                     <input type="radio" name="owned_by" value=2
                                         @if($dog->owned_by == 2) checked @endif
                                     > ملك لعميل
@@ -96,12 +96,24 @@
                                 @enderror
                             </div>
 
-
                             <div class="form-group col-md-6">
-                                <label>حالة الكلب</label>
+                                <label>النوع</label>
+                                <div class="form-control form-control-solid">
+                                    <input type="radio" name="gender" value="male"
+                                           @if($dog->gender == "male") checked @endif
+                                    > ذكر
+                                    &ensp;
+                                    <input type="radio" name="gender" value="female"
+                                           @if($dog->gender == "female") checked @endif
+                                    > انثي
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label></label>
                                 <div class="form-control form-control-solid">
                                     <input type="checkbox" name="status" value=0
-                                    @if($dog->status == 0) checked @endif
+                                           @if($dog->status == 0) checked @endif
                                     > ميت
                                 </div>
                             </div>

@@ -69,10 +69,10 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                    <label>ملكية الكلب</label>
+                                    <label></label>
                                 <div class="form-control form-control-solid">
                                     <input type="radio" name="owned_by" value=1>  مولود بالمزرعة
-                                    <br>
+                                    &ensp;
                                     <input type="radio" name="owned_by" value=2> ملك لعميل
                                 </div>
                                 @error('owned_by')
@@ -80,9 +80,17 @@
                                 @enderror
                             </div>
 
-
                             <div class="form-group col-md-6">
-                                <label>حالة الكلب</label>
+                                <label>النوع</label>
+                                <div class="form-control form-control-solid">
+                                    <input type="radio" name="gender" value="male"> ذكر
+                                    &ensp;
+                                    <input type="radio" name="gender" value="female"> انثي
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label></label>
                                 <div class="form-control form-control-solid">
                                     <input type="checkbox" name="status" value=0 > ميت
                                 </div>

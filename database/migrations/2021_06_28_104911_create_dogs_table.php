@@ -39,8 +39,9 @@ class CreateDogsTable extends Migration
              * */
             $table->tinyInteger('status')->default(1);
             $table->boolean('is_active')->default(1);
-
+            $table->enum('gender',['male','female']);
             $table->timestamps();
+
         });
     }
 
