@@ -23,5 +23,9 @@ class UsersSeeder extends Seeder
             'password'          => Hash::make('demo'),
             'email_verified_at' => now(),
         ]);
+
+        User::create([
+            ''
+        ]);
     }
 }

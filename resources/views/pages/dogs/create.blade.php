@@ -50,11 +50,24 @@
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
-                            <div class="form-group col-md">
+                            <div class="form-group col-md-6">
                                 <label>رقم التسجيل</label>
                                 <input type="text" name="registration_num" class="form-control form-control-solid"
                                        placeholder="رقم التسجيل" value="{{old('registration_num')}}"/>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label>الفصيلة</label>
+                                <select name="faction_id" class="form-control form-control-solid">
+                                    <option value="" disabled selected>اختر الفصيلة</option>
+                                    @foreach($factions as $faction)
+                                    <option value="{{$faction->id}}" @if($faction->id == old("faction_id")) selected   @endif>{{$faction->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('faction_id')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+
                             <div class="form-control-solid">
                                 <label>ملاحظات</label>
                                 <textarea name="notes" class="form-control form-control-solid" cols="30"

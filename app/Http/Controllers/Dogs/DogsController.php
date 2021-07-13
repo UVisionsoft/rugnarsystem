@@ -9,6 +9,7 @@ use App\Models\Activity;
 use App\Models\Dog;
 use App\Models\DogActivity;
 use App\Models\DogVaccines;
+use App\Models\Faction;
 use App\Models\User;
 use App\Models\Vaccine;
 use Illuminate\Http\Request;
@@ -34,10 +35,11 @@ class DogsController extends Controller
      */
     public function create()
     {
+        $factions = Faction::all();
         $owners = User::where('type', 2)->get();
         $vaccines = Vaccine::pluck('name', 'id');
 
-        return view('pages.dogs.create', compact('owners', 'vaccines'));
+        return view('pages.dogs.create', compact('owners', 'vaccines','factions'));
     }
 
     /**
@@ -53,6 +55,7 @@ class DogsController extends Controller
             'avatar' => ['image'],
             'age' => ['required', 'numeric'],
             'user_id' => ['required'],
+            'faction_id' => ['required'],
         ]);
         $data = $request->all();
 //        $data['activities'] = array_map(function ($activity) {
@@ -102,12 +105,13 @@ class DogsController extends Controller
      */
     public function edit($id)
     {
+        $factions = Faction::all();
         $vaccines = Vaccine::all();
         $dog = Dog::where('id', $id)->with('vaccines')->first();
         $owners = User::where('type', 2)->get();
         $activities = Activity::pluck('name', 'id');
 
-        return view('pages.dogs.edit', compact('dog', 'owners', 'vaccines', 'activities'));
+        return view('pages.dogs.edit', compact('dog', 'owners', 'vaccines', 'activities','factions'));
     }
 
     /**
@@ -136,7 +140,7 @@ class DogsController extends Controller
 //        return $data;
         $dog->update($data);
         $dog->vaccines()->sync($data['vaccines']);
-        $dog->activities()->sync($data['activities']);
+//        $dog->activities()->sync($data['activities']);
 
         return redirect('dogs');
     }
