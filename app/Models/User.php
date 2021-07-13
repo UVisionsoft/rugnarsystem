@@ -57,8 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function ActivitySessions()
+    public function activities()
     {
-        return $this->hasMany(ActivitySession::class,'trainer_id');
+        return $this->hasMany(ActivityReport::class,'trainer_id');
     }
 }

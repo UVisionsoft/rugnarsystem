@@ -29,8 +29,8 @@
                                 <label class="label-control">الموظف</label>
                                 <select name="user_id" class="form-control form-control-solid">
                                     @foreach($empolyees as $empolyee)
-                                        <option  data-salary="0"> من فضلك اختر الموظف </option>
-                                        <option data-salary="{{$empolyee->salary}}"
+                                        <option data-salary="null"> من فضلك اختر الموظف</option>
+                                        <option data-salary="{{$empolyee}}"
                                                 value="{{$empolyee->id}}">{{$empolyee->name}}</option>
                                     @endforeach
                                 </select>
@@ -42,6 +42,12 @@
                             <div class="form-group col-md-6">
                                 <label class="label-control">قيمة الراتب</label>
                                 <input type="number" name="amount" class="form-control form-control-solid" value="0">
+                                <small class="text-danger salary_detail"> </small>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label class="label-control">ملاحظات</label>
+                                <textarea name="notes" class="form-control form-control-solid" rows="3"></textarea>
                             </div>
 
                         </div>
@@ -64,7 +70,25 @@
         <script>
             $('select[name="user_id"]').on('change', function () {
                 let salary = $(this).find(':selected').data('salary')
-                $('input[name="amount"]').val(salary)
+                if (salary !== null) {
+                    // salary = JSON.parse(salary)
+                    $('input[name="amount"]').val(salary.total_salary);
+
+                    if (salary.salary_type == 0) {
+                        $('.salary_detail').text(" الراتب الشهري: " +
+                            salary.activities_count +
+                            " يوم * "+
+                            salary.salary+
+                            " = "+
+                            salary.total_salary
+                        );
+                    } else {
+                        $('.salary_detail').text(" الراتب الشهري: " + salary.total_salary)
+                    }
+                } else {
+                    $('input[name="amount"]').val(0)
+                }
+
             });
         </script>
     @endsection

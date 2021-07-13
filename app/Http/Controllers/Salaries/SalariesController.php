@@ -20,17 +20,16 @@ class SalariesController extends Controller
     public function create()
     {
         $usersAlreadyGotPaid = Salary::whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])->pluck('user_id');
-        $empolyees = User::whereNotIn('id', $usersAlreadyGotPaid)->whereIn('type', [1, 3])->with(["ActivitySessions" => function($q){
-            $q->whereBetween('created_at', [now()->startOfMonth() , now()->endOfMonth()]);
+
+        $empolyees = User::whereNotIn('id', $usersAlreadyGotPaid)->whereIn('type', [1, 3])->withCount(["activities" => function($q){
+            return $q->whereBetween('created_at', [now()->startOfMonth() , now()->endOfMonth()]);
         }])->get();
-        return $empolyees;
 
         $empolyees = $empolyees->map(function ($empolyee){
             if($empolyee['salary_type'] == 0){
-                //session rate * session count
-                // This month sessions
-                $empolyee['activity_sessions_count'] = $empolyee['activity_sessions']->groupBy('created_at');
-                $empolyee['salary'] = $empolyee['salary'] * 10;
+                $empolyee['total_salary'] = $empolyee['salary'] * $empolyee['activities_count'];
+            }else{
+                $empolyee['total_salary'] = $empolyee['salary'];
             }
             return $empolyee;
         });
@@ -52,6 +51,7 @@ class SalariesController extends Controller
             'to' => $to,
             'user_id' => $request->get('user_id'),
             'amount' => $request->get('amount'),
+            'notes' => $request->get('notes') ?? "",
         ]);
 
         return redirect(route('salaries.index'));

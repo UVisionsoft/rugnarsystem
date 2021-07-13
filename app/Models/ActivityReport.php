@@ -9,6 +9,8 @@ class ActivityReport extends Model
 {
     use HasFactory;
     protected $table = 'activity_reports';
+    public $timestamps = false;
+    protected $casts = ['created_at'=>'date'];
 
     public function trainer()
     {
