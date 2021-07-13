@@ -80,7 +80,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <label>النوع</label>
                                 <div class="form-control form-control-solid">
                                     <input type="radio" name="gender" value="male"> ذكر
