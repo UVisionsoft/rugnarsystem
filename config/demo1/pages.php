@@ -323,6 +323,27 @@ return array(
             ),
         ),
             ],
+
+        'return_purchases'=>[
+        'title' => 'الفواتير',
+        'top_bar' => [
+            'create' => [
+                'caption' => 'إضافة جديد',
+                'title' => 'فاتورة جديدة',
+                'url' => '/invoices/return_purchases/create',
+            ]
+        ],
+        'assets' => array(
+            'custom' => array(
+                'css' => array(
+                    'plugins/custom/datatables/datatables.bundle.css',
+                ),
+                'js' => array(
+                    'plugins/custom/datatables/datatables.bundle.js',
+                ),
+            ),
+        ),
+            ],
     ),
 
     'factions' => array(

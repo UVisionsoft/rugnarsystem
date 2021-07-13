@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class ReturnSalesDataTable extends DataTable
+class ReturnPurchasesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -24,7 +24,7 @@ class ReturnSalesDataTable extends DataTable
             ->eloquent($query)
             ->rawColumns(['action'])
             ->addColumn('action', function (Invoice $model) {
-                return view('pages.invoices.return_sales._action-menu', compact('model'));
+                return view('pages.invoices.return_purchases._action-menu', compact('model'));
             });
     }
 
@@ -48,7 +48,7 @@ class ReturnSalesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('return-sales-table')
+            ->setTableId('return-purchases-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(3)
@@ -96,6 +96,6 @@ class ReturnSalesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'ReturnSales_' . date('YmdHis');
+        return 'ReturnPurchases_' . date('YmdHis');
     }
 }
