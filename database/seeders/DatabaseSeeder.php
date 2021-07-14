@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             FactionsSeeder::class,
             DogsSeeder::class,
             ServicesSeeder::class,
+            DogActivitiesSeeder::class,
+            DogVaccineSeeder::class,
             // PermissionsSeeder::class,
             // RolesSeeder::class,
         ]);
