@@ -34,17 +34,29 @@
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
+
                             <div class="form-group col-md-6">
-                                <label>عمر الكلب</label>
-                                <input type="number" name="age" class="form-control form-control-solid"
-                                       placeholder="عمر الكلب" value="{{ old('age')?? $dog->age }}"/>
-                                @error('age')
+                                <label>ملكية الكلب</label>
+                                <div class="form-control form-control-solid">
+                                    <label>
+                                    <input type="radio" name="owned_by" value=1
+                                           @if($dog->owned_by == 1) checked @endif
+                                    >  مولود بالمزرعة
+                                    </label>
+                                    <label>&ensp;
+                                    <input type="radio" name="owned_by" value=2
+                                           @if($dog->owned_by == 2) checked @endif
+                                    > ملك لعميل
+                                    </label>
+                                </div>
+                                @error('owned_by')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label>مالك الكلب</label>
-                                <select name="user_id" class="form-control form-control-solid">
+                                <select name="user_id" class="form-control form-control-solid" id="user_id_">
                                     <option value="" readonly>اختر مالك الكلب</option>
                                     @foreach($owners as $owner)
                                         <option value="{{$owner->id}}"
@@ -57,6 +69,16 @@
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
+
+                            <div class="form-group col-md-6">
+                                <label>عمر الكلب</label>
+                                <input type="number" name="age" class="form-control form-control-solid"
+                                       placeholder="عمر الكلب" value="{{ old('age')?? $dog->age }}"/>
+                                @error('age')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+
                             <div class="form-group col-md-6">
                                 <label>رقم التسجيل</label>
                                 <input type="text" name="registration_num" class="form-control form-control-solid"
@@ -75,23 +97,6 @@
                                     @endforeach
                                 </select>
                                 @error('faction_id')
-                                <small class="text-danger">{{$message}}</small>
-                                @enderror
-                            </div>
-
-
-                            <div class="form-group col-md-6">
-                                <label></label>
-                                <div class="form-control form-control-solid">
-                                    <input type="radio" name="owned_by" value=1
-                                        @if($dog->owned_by == 1) checked @endif
-                                    >  مولود بالمزرعة
-                                    &ensp;
-                                    <input type="radio" name="owned_by" value=2
-                                        @if($dog->owned_by == 2) checked @endif
-                                    > ملك لعميل
-                                </div>
-                                @error('owned_by')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
@@ -160,5 +165,22 @@
             </div>
         </div>
     </form>
+
+
+    @section('scripts')
+            <script>
+                $('input[type=radio][name=owned_by]').change(function() {
+                        if (this.value == 1) {
+                            // alert("مولود بالمزرعة");
+                            $('#user_id_').attr('disabled','disabled');
+                            $("#user_id_").val('');
+                        }
+                        else if (this.value == 2) {
+                            // alert("ملك لعميل");
+                            $('#user_id_').removeAttr('disabled');
+                        }
+                });
+            </script>
+        @endsection
 
 </x-base-layout>

@@ -31,6 +31,8 @@ class DogsDataTable extends DataTable
                 return "<a href='" . route('dogs.show', $model->id) . "'>{$model->name}</a>";
             })
             ->editColumn('owner', function ($model) {
+                if(!$model->user_id)
+                    return 'ملك للمزرعة';
                 return "<a href='" . route('accounts.users.show', $model->user_id) . "'>{$model->user->name}</a>";
             })
             ->addColumn('action', function ($model) {

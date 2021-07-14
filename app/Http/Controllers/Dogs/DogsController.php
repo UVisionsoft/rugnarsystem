@@ -53,8 +53,9 @@ class DogsController extends Controller
             'name' => ['required', 'string'],
             'avatar' => ['image'],
             'age' => ['required', 'numeric'],
-            'user_id' => ['required'],
+//            'user_id' => ['required'],
             'faction_id' => ['required'],
+            "user_id" => "required_if:owned_by,==,2",
         ]);
         $data = $request->all();
 //        $data['activities'] = array_map(function ($activity) {
@@ -125,9 +126,15 @@ class DogsController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'age' => ['required', 'numeric'],
-            'user_id' => ['required'],
+//            'user_id' => ['required'],
+            "user_id" => "required_if:owned_by,==,2",
             'avatar' => 'image'
         ]);
+
+
+        if ($request["owned_by"] == 1){
+            $request["user_id"] = null;
+        }
 
         $data = $request->all();
 
