@@ -45,6 +45,7 @@
                             <th>#</th>
                             <th>الفصيلة</th>
                             <th>النوع</th>
+                            <th>السن (بالشهور)</th>
                             <th>السعر</th>
                             <th></th>
                             </thead>
@@ -53,7 +54,7 @@
                             <tr v-for="(dog, index) in form.dogs">
                                 <td>@{{ index }}</td>
                                 <td>
-                                    <select class="form-control form-control-solid" v-model="dog.faction_id">
+                                    <select class="form-control form-control-solid" v-model="dog.faction">
                                         <option :disabled="true" :value="null">اختر الفصيلة</option>
                                         <option v-for="faction in factions" :value="faction">@{{ faction.name }}
                                         </option>
@@ -66,7 +67,11 @@
                                         <option value="female">انثي</option>
                                     </select>
                                 </td>
-                                <td><input class="form-control form-control-solid" type="number" min="0" v-model="dog.price">
+                                <td>
+                                    <input class="form-control form-control-solid" type="number" min="0" v-model="dog.age">
+                                </td>
+                                <td>
+                                    <input class="form-control form-control-solid" type="number" min="0" v-model="dog.price">
                                 </td>
                                 <td>
                                     <button class="btn btn-danger btn-icon" @click="removeRow(index)">
@@ -104,7 +109,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">الضريبة (%)</label>
-                                    <input class="form-control form-control-solid" type="number" min="0" v-model="form.tax">
+                                    <input class="form-control form-control-solid" type="number" min="0"
+                                           v-model="form.tax">
                                 </div>
                             </div>
                         </div>
@@ -112,7 +118,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for=""> الاجمالي بعد الخصم و الضريبة </label>
-                                    <input class="form-control form-control-solid" type="number" min="0" :disabled="true" :readonly="true"
+                                    <input class="form-control form-control-solid" type="number" min="0"
+                                           :disabled="true" :readonly="true"
                                            v-model="total_discount_tax">
                                 </div>
                             </div>
@@ -124,9 +131,15 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for=""> المتبقي </label>
-                                    <input class="form-control form-control-solid" type="number" min="0" :disabled="true"
-                                           :readonly="true" v-model="rest">
+                                    <label for=""> المتبقي من مبلغ الفاتورة </label>
+                                    <input class="form-control form-control-solid" type="number" min="0" :disabled="true" :readonly="true" v-model="rest">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-10">
+                                <div class="form-group">
+                                    <label for=""> المتبقي من رصيد العميل </label>
+                                    <input style="color:red" class="form-control form-control-solid" type="number" min="0" :disabled="true" :readonly="true" v-model="restOfCredit">
                                 </div>
                             </div>
                         </div>
@@ -151,8 +164,9 @@
                     form: {
                         supplier: {},
                         dogs: [{
-                            faction_id: null,
+                            faction: null,
                             gender: null,
+                            age: 12,
                             price: 0,
                         }],
                         paid: 0,
@@ -179,7 +193,7 @@
                         let afterDiscount = 0;
                         if (discountAmount > 0) {
                             afterDiscount = total - discountAmount;
-                        }else{
+                        } else {
                             afterDiscount = total;
                         }
 
@@ -194,16 +208,40 @@
 
                     },
                     rest: function () {
+                        if(this.form.paid > this.total_discount_tax)
+                            return 0;
+
                         return this.total_discount_tax - this.form.paid
                     },
+                    restOfCredit: function (){
+                        let paid = this.form.paid;
+                        let totalCredit = this.total_discount_tax - this.form.supplier.credit;
+                        return totalCredit - paid;
+                    }
                 },
                 methods: {
-                    send: function () {
-
+                    async send(){
+                        const requestOptions = {
+                            method: "POST",
+                            headers: {"Content-Type": "application/json", "X-CSRF-TOKEN": "{{csrf_token()}}"},
+                            body: JSON.stringify({
+                                items: this.form.dogs,
+                                discount: parseInt(this.form.discount),
+                                paid: parseInt(this.form.discount),
+                                tax: parseInt(this.form.tax),
+                                supplier_id: parseInt(this.form.supplier.id),
+                                rest: parseInt(this.rest),
+                                total: parseInt(this.total),
+                                total_discount_tax: parseInt(this.total_discount_tax),
+                            })
+                        };
+                        const response = await fetch("{{route('invoices.purchases.store')}}", requestOptions)
+                        const data = await response.json();
+                        console.log(data);
                     },
                     addNewRow: function () {
                         this.form.dogs.push({
-                            faction_id: null,
+                            faction: null,
                             gender: null,
                             price: 0,
                         });
@@ -212,22 +250,22 @@
                         this.form.dogs.splice(index, 1);
                     }
                 },
-                watch:{
-                    "form.discount": function (discount){
-                        if(discount > this.total){
+                watch: {
+                    "form.discount": function (discount) {
+                        if (discount > this.total) {
                             this.form.discount = 0;
                         }
                     },
-                    "form.tax": function (tax){
-                        if(tax > 100){
+                    "form.tax": function (tax) {
+                        if (tax > 100) {
                             this.form.tax = 100;
                         }
                     },
-                    "form.paid": function (paid){
-                        if(paid > this.total_discount_tax + this.form.supplier.credit){
-                            this.form.paid = this.total_discount_tax + this.form.supplier.credit;
-                        }
-                    }
+                    // "form.paid": function (paid) {
+                    //     if (paid > this.total_discount_tax + this.form.supplier.credit) {
+                    //         this.form.paid = this.total_discount_tax + this.form.supplier.credit;
+                    //     }
+                    // }
                 }
             })
         </script>

@@ -71,9 +71,12 @@
                             <div class="form-group col-md-6">
                                     <label></label>
                                 <div class="form-control form-control-solid">
-                                    <input type="radio" name="owned_by" value=1>  مولود بالمزرعة
-                                    &ensp;
-                                    <input type="radio" name="owned_by" value=2> ملك لعميل
+                                    <label>
+                                        <input type="radio" name="owned_by" value=1>  مولود بالمزرعة
+                                    </label>
+                                    &ensp;<label>
+                                        <input type="radio" name="owned_by" checked value=2> ملك لعميل
+                                    </label>
                                 </div>
                                 @error('owned_by')
                                 <small class="text-danger">{{$message}}</small>
@@ -83,9 +86,12 @@
                             <div class="form-group col-md-3">
                                 <label>النوع</label>
                                 <div class="form-control form-control-solid">
-                                    <input type="radio" name="gender" value="male"> ذكر
-                                    &ensp;
-                                    <input type="radio" name="gender" value="female"> انثي
+                                    <label>
+                                        <input type="radio" name="gender" checked value="male"> ذكر
+                                    &ensp;</label>
+                                    <label>
+                                        <input type="radio" name="gender" value="female"> انثي
+                                    </label>
                                 </div>
                             </div>
 

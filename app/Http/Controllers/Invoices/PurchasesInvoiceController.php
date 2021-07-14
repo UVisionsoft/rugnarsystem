@@ -41,7 +41,25 @@ class PurchasesInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
+
+        /*
+         * 1 => Create Dogs
+         * 2 => Create Purchase Invoice & it's Items
+         * 3 => Create Transaction with invoice amount (-1)
+         * 4 => check if amount paid is more than invoice amount and put the rest as supplier credit
+         *  => if true create a new payment with new transaction  (-1)
+         * */
+
+        /*
+         * Creating dogs for
+         *
+         * */
+        foreach ($request->get('items') as $item)
+        {
+        }
+
+
     }
 
     /**

@@ -80,8 +80,8 @@
                     @if(Request::segment(2) == 'users' || Request::segment(2) == 'vendors')
                         <div class="form-group">
                             <label>الرصيد</label>
-                            <input type="number" name="credit" class="form-control form-control-solid"
-                                   placeholder="الرصيد" value="{{old('credit') ?? $user->credit }}"/>
+                            <input type="number" class="form-control form-control-solid disabled"
+                                   placeholder="الرصيد" readonly disabled value="{{old('credit') ?? $user->credit }}"/>
                             @error('credit')
                             <small class="text-danger">{{$message}}</small>
                             @enderror

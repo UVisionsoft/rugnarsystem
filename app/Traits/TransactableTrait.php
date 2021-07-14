@@ -16,16 +16,19 @@ trait TransactableTrait
 
     public static function bootTransactableTrait()
     {
-        if (!property_exists(self::class, 'transactionDirection')) {
+        $methodExists = method_exists(self::class, 'transactionDirection');
+        $propertyExists = property_exists(self::class, 'transactionDirection');
+
+        if(!$methodExists && !$propertyExists)
             throw new \Exception('Please define "$transactionDirection" in your model');
-        }
+
         if (!property_exists(self::class, 'transactionAmount')) {
             throw new \Exception('Please define "$transactionAmount" in your model');
         }
 
-        static::created(function ($model) {
+        static::created(function ($model) use($methodExists) {
             $model->transaction()->create([
-                'direction' => $model->transactionDirection,
+                'direction' => $methodExists ? $model->transactionDirection() : $model->transactionDirection,
                 'amount' => $model[$model->transactionAmount],
                 'notes' => $model->notes ?? "",
             ]);

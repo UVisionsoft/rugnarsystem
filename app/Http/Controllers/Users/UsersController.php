@@ -32,7 +32,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $types = ['admins'=>'مدير', 'trainers'=>'مدرب', 'users'=>'عميل', 'doctors'=>'طبيب', 'vendors'=>'مورد'];
+        $types = ['admins' => 'مدير', 'trainers' => 'مدرب', 'users' => 'عميل', 'doctors' => 'طبيب', 'vendors' => 'مورد'];
         $type = $types[request()->segment(2)];
 
         return view('pages.users.create', compact('type'));
@@ -56,6 +56,11 @@ class UsersController extends Controller
         $types = array_flip($types);
         $request->merge(['type' => $types[$request->segment(2)]]);
         $request["password"] = bcrypt($request["password"]);
+
+        if ($request->get('type') == 4 && $request->get('credit') > 0) //if vendor and credit not negative
+            $request->merge(['credit' => $request->get('credit') * -1]);
+
+
         $user = User::create($request->all());
 
         return redirect('accounts/' . $request->segment(2));
@@ -71,7 +76,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('pages.users.profile',compact('user'));
+        return view('pages.users.profile', compact('user'));
     }
 
     /**
@@ -83,7 +88,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $types = ['admins'=>'مدير', 'trainers'=>'مدرب', 'users'=>'عميل', 'doctors'=>'طبيب', 'vendors'=>'مورد'];
+        $types = ['admins' => 'مدير', 'trainers' => 'مدرب', 'users' => 'عميل', 'doctors' => 'طبيب', 'vendors' => 'مورد'];
         $type = $types[request()->segment(2)];
 
         return view('pages.users.edit', compact('user', 'type'));
@@ -105,8 +110,8 @@ class UsersController extends Controller
             'password' => 'nullable|min:6',
         ]);
 
-        if($request->filled('password')){
-            $request->merge(['password'=> Hash::make($request->get('password'))]);
+        if ($request->filled('password')) {
+            $request->merge(['password' => Hash::make($request->get('password'))]);
         } else {
             $request->request->remove('password');
         }

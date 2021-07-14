@@ -14,8 +14,8 @@ class Expense extends Model
     protected $fillable = ['name','amount','notes'];
 
     protected $moneyAttribute = 'amount';
-    protected $transactionDirection = -1;
     protected $transactionAmount = 'amount';
+    protected $transactionDirection = -1;
 
 
 

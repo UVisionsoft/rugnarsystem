@@ -21,7 +21,8 @@ class CreateDogsTable extends Migration
             $table->string('registration_num')->default('');
             $table->text('notes')->nullable();
 
-            $table->foreignIdFor(\App\Models\User::class)->constrained()->restrictOnDelete();
+            $table->foreignIdFor(\App\Models\User::class)->nullable()->default(null)->constrained()->restrictOnDelete();
+
             $table->foreignIdFor(\App\Models\Faction::class)->constrained()->restrictOnDelete();
             /*
              * owned By

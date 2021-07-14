@@ -86,7 +86,13 @@ Route::prefix('settings')->name('settings.')->group(function () {
     Route::resource('accounts', \App\Http\Controllers\Settings\AppSettingsController::class);
 });
 
-
+Route::get('test', function (){
+    \App\Models\User::find(3)->payments()->create([
+        'amount'=>100,
+        'rest'=>500,
+        'notes'=>'notes'
+    ]);
+});
 
 //Route::get('activity/session',[\App\Http\Controllers\ActivitySession\ActivitySessionController::class,'activitySessions'])->name('activity.sessions');
 
