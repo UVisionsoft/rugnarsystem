@@ -227,9 +227,9 @@
                             body: JSON.stringify({
                                 items: this.form.dogs,
                                 discount: parseInt(this.form.discount),
-                                paid: parseInt(this.form.discount),
+                                paid: parseInt(this.form.paid),
                                 tax: parseInt(this.form.tax),
-                                supplier_id: parseInt(this.form.supplier.id),
+                                supplier: this.form.supplier,
                                 rest: parseInt(this.rest),
                                 total: parseInt(this.total),
                                 total_discount_tax: parseInt(this.total_discount_tax),
@@ -242,6 +242,7 @@
                     addNewRow: function () {
                         this.form.dogs.push({
                             faction: null,
+                            age: 12,
                             gender: null,
                             price: 0,
                         });
