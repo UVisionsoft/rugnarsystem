@@ -159,6 +159,5 @@ class DogsController extends Controller
 
     public function profile($id){
 
-
     }
 }
