@@ -40,6 +40,16 @@ class UsersSeeder extends Seeder
             'type'              =>2,
         ]);
 
+
+        User::create([
+            'name'              => 'User 2',
+            'email'             => 'user2@demo.com',
+            'password'          => bcrypt(123456),
+            'email_verified_at' => now(),
+            'type'              =>2,
+            'credit'            => 2000,
+        ]);
+
         User::create([
             'name'              => 'Doctor',
             'email'             => 'doctor@demo.com',
@@ -54,6 +64,15 @@ class UsersSeeder extends Seeder
             'password'          => bcrypt(123456),
             'email_verified_at' => now(),
             'type'              => 4,
+        ]);
+
+        User::create([
+            'name'              => 'Vendor 2',
+            'email'             => 'vendor2@demo.com',
+            'password'          => bcrypt(123456),
+            'email_verified_at' => now(),
+            'type'              => 4,
+            'credit'            => 3500,
         ]);
 
     }

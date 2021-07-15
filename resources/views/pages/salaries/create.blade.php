@@ -28,8 +28,8 @@
                             <div class="form-group col-md-6">
                                 <label class="label-control">الموظف</label>
                                 <select name="user_id" class="form-control form-control-solid">
+                                    <option data-salary="null"> من فضلك اختر الموظف</option>
                                     @foreach($empolyees as $empolyee)
-                                        <option data-salary="null"> من فضلك اختر الموظف</option>
                                         <option data-salary="{{$empolyee}}"
                                                 value="{{$empolyee->id}}">{{$empolyee->name}}</option>
                                     @endforeach
