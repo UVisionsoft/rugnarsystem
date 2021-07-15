@@ -21,7 +21,7 @@ class CreateInvoiceDetailsTable extends Migration
              * if (service id => null) then it's a sales item
              * else it's a service only item
              * */
-            $table->foreignIdFor(\App\Models\Service::class)->constrained()->restrictOnDelete()->nullable()->default(null);
+            $table->foreignIdFor(\App\Models\Service::class)->nullable()->default(null)->constrained()->restrictOnDelete();
             $table->integer('amount');
             $table->timestamps();
         });

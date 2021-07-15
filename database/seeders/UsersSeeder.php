@@ -37,7 +37,7 @@ class UsersSeeder extends Seeder
             'email'             => 'user@demo.com',
             'password'          => bcrypt(123456),
             'email_verified_at' => now(),
-            'type'              =>2,
+            'type'              => 2,
         ]);
 
         User::create([
@@ -54,6 +54,7 @@ class UsersSeeder extends Seeder
             'password'          => bcrypt(123456),
             'email_verified_at' => now(),
             'type'              => 4,
+            'credit'            => -1000,
         ]);
 
     }

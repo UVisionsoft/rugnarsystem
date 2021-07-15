@@ -105,17 +105,19 @@ class PurchasesInvoiceController extends Controller
                     'amount' => $item['price'],
                 ]);
             }
-
             //Create Payments
             $this->paymentsService
                 ->user($invoice->user)
-                ->createPayments($request->get('paid'), $invoice->total_amount);
+                ->createPayments($request->get('paid'), $totalAfterDiscountTax);
 
 
             return $invoice;
         }, 1);
 
-        return $transaction;
+        return response()->json([
+            'to'=> route('invoices.purchases.index'),
+            'data'=> $transaction,
+        ]);
     }
 
     /**

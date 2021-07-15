@@ -164,8 +164,8 @@
                     form: {
                         supplier: {},
                         dogs: [{
-                            faction: null,
-                            gender: null,
+                            faction: @json($factions[0]),
+                            gender: 'male',
                             age: 12,
                             price: 0,
                         }],
@@ -237,13 +237,13 @@
                         };
                         const response = await fetch("{{route('invoices.purchases.store')}}", requestOptions)
                         const data = await response.json();
-                        console.log(data);
+                        window.location.href = data.to;
                     },
                     addNewRow: function () {
                         this.form.dogs.push({
-                            faction: null,
+                            faction: @json($factions[0]),
+                            gender: 'male',
                             age: 12,
-                            gender: null,
                             price: 0,
                         });
                     },

@@ -21,13 +21,26 @@ class Payment extends Model
         return $this->belongsTo(User::class);
     }
 
-
     public function transactionDirection()
     {
-        if($this->user->type === 2)
+        if ($this->user->type === 2) // IF customer
             return 1;
 
         return -1;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            $userCredit = $model->user->credit;
+            $newCredit = $userCredit + $model->amount;
+            $model->user->update([
+                'credit' => $newCredit
+            ]);
+
+            $model->update(['rest' => $newCredit]);
+        });
     }
 
 }

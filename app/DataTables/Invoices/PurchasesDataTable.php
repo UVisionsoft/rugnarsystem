@@ -23,6 +23,9 @@ class PurchasesDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->rawColumns(['action'])
+            ->editColumn('user_id', function (Invoice $model) {
+                return $model->user->name;
+            })
             ->addColumn('action', function (Invoice $model) {
                 return view('pages.invoices.purchases._action-menu', compact('model'));
             });
@@ -77,7 +80,7 @@ class PurchasesDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#'),
-            Column::make('user_id')->title('اسم العميل'),
+            Column::make('user_id')->title('اسم المورد'),
             Column::make('total_amount')->title('الاجمالي'),
             Column::make('discount')->title('الخصم'),
             Column::make('tax')->title('قيمة الضريبة'),
