@@ -274,3 +274,5 @@
     @endsection
 
 </x-base-layout>
+
+

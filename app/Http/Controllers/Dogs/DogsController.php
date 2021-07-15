@@ -62,6 +62,7 @@ class DogsController extends Controller
         }
 
         $data = $request->all();
+
 //        $data['activities'] = array_map(function ($activity) {
 //            if ($activity['duration'] === null)
 //                return ['duration' => 0];
