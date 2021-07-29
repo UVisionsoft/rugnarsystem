@@ -16,6 +16,7 @@ class CreateReturnItemsTable extends Migration
         Schema::create('return_items', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\InvoiceReturn::class)->constrained()->restrictOnDelete();
+            $table->foreignIdFor(\App\Models\InvoiceDetail::class)->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }

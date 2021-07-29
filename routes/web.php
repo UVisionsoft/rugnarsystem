@@ -59,9 +59,15 @@ Route::prefix('accounts')->name('accounts.')->group(function () {
 
 Route::prefix('invoices')->name('invoices.')->group(function () {
     Route::resource('sales',\App\Http\Controllers\Invoices\SalesInvoiceController::class);
+
     Route::resource('return_sales',\App\Http\Controllers\Invoices\ReturnSalesInvoiceController::class);
+
+
     Route::resource('purchases',\App\Http\Controllers\Invoices\PurchasesInvoiceController::class);
-    Route::resource('return_purchases',\App\Http\Controllers\Invoices\ReturnPurchasesInvoiceController::class);
+    Route::resource('purchases.returns',\App\Http\Controllers\Invoices\ReturnPurchasesInvoiceController::class);
+
+
+    Route::get('purchases/return/{id}',[\App\Http\Controllers\Invoices\ReturnPurchasesInvoiceController::class,'purchasesReturnInvoice'])->name('purchases.return');
 });
 
 Route::resource('activities', \App\Http\Controllers\Activities\ActivitiesController::class);

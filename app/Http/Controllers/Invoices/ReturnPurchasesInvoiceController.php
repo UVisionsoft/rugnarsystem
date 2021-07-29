@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Invoices;
 
 use App\DataTables\Invoices\ReturnPurchasesDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
+use App\Models\InvoiceReturn;
+use App\Models\ReturnItem;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class ReturnPurchasesInvoiceController extends Controller
@@ -11,11 +16,20 @@ class ReturnPurchasesInvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index(ReturnPurchasesDataTable $dataTable)
+    public function index(Invoice $purchase)
     {
-        return $dataTable->render('pages.invoices.return_purchases.index');
+        $purchase->load(['details.dog', 'details.service']);
+
+        if($purchase->returnInvoice){
+            $returnedItems = $purchase->returnInvoice->items->pluck('invoice_detail_id');
+            $purchase->load(['details'=>function(HasMany $q) use($returnedItems){
+                return $q->whereNotIn('id', $returnedItems);
+            },'details.dog', 'details.service']);
+        }
+
+
+        return view('pages.invoices.return_purchases.return_invoice', compact('purchase'));
     }
 
     /**
@@ -31,18 +45,38 @@ class ReturnPurchasesInvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Invoice $purchase, Request $request)
     {
-        //
+        $action = $request->get('action');
+        switch ($action) {
+            case 'استرجاع':
+                $items = InvoiceDetail::whereIn('id', $request->get('items'))->get();
+                break;
+            case 'استرجاع كل الفاتورة':
+                $items = $purchase->details;
+                break;
+        }
+        //TODO:: Create Or Find Return Invoice
+        $returnInvoice = InvoiceReturn::firstOrCreate([
+            "invoice_id" => $purchase->id
+        ]);
+        //TODO::insert Items in Return Invoice
+        foreach ($items as $item) {
+            $returnInvoice->items()->firstOrCreate([
+                'invoice_detail_id' => $item->id
+            ]);
+        }
+//        dd($returnInvoice);
+        return redirect(route('invoices.purchases.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +87,7 @@ class ReturnPurchasesInvoiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +98,8 @@ class ReturnPurchasesInvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,11 +110,12 @@ class ReturnPurchasesInvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
 }

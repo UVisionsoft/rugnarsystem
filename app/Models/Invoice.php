@@ -24,4 +24,9 @@ class Invoice extends Model
         return $this->hasMany(InvoiceDetail::class);
     }
 
+    public function returnInvoice()
+    {
+        return $this->hasOne(InvoiceReturn::class, 'invoice_id');
+    }
+
 }

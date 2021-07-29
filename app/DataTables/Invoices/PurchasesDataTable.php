@@ -54,7 +54,7 @@ class PurchasesDataTable extends DataTable
             ->setTableId('purchases-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(3)
+            ->orderBy(0,'asc')
             ->responsive()
             ->autoWidth(false)
             ->dom("<f<t>
