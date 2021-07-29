@@ -6,15 +6,17 @@
         <div class="card-body pt-6">
             <form action="" method="post">
                 @csrf
-                @forelse($purchase->details as $product)
 
                 <table class="table">
+                    @if($purchase->details->count() > 0)
                         <thead>
                         <td>Mark</td>
                         <td>Name</td>
                         <td>Price</td>
                         </thead>
+                    @endif
                         <tbody>
+                        @forelse($purchase->details as $product)
                         <tr>
                             <td><input type="checkbox" name="items[]" value="{{$product->id}}"></td>
                             <td>
@@ -30,11 +32,13 @@
                             </td>
                             <td>{{$product->amount}}</td>
                         </tr>
+                        @empty
+                            <td>
+                                <h4> لايوجد منتجات لهذه الفاتورة </h4>
+                            </td>
+                        @endforelse
                         </tbody>
                     </table>
-                @empty
-                    <h4> لايوجد منتجات لهذه الفاتورة </h4>
-                @endforelse
 
                 @if($purchase->details->count() > 0)
                     <input type="submit" class="btn btn-primary" name="action" value="استرجاع">
